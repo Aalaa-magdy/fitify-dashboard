@@ -27,5 +27,18 @@
   .card {
     @apply bg-white rounded-lg shadow p-6;
   }
+
+  .gradient-btn {
+    background: linear-gradient(to right, #14919B, #E2F163); 
+  }
+
+  .gradient-yellow {
+    background: linear-gradient(to right, #828B39, #828B39);
+  }
+
+  .gradient-gray {
+    background: linear-gradient(to right, #F3F3F3, #D5D5D5);
+  }
+
 }
 

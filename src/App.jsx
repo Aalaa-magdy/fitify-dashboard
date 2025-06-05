@@ -1,24 +1,41 @@
+// src/App.js
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './pages/AdminLogin';
+import Dashboard from './pages/Dashboard';
+import ProtectedRoute from './routes/ProtectedRoute';
+import { AuthProvider } from './context/AuthContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import './App.css'
 
 function App() {
-
   return (
     <>
-        <div className="bg-primary-500 text-white">
-  <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-    <div className="flex items-center space-x-2">
-      <span className=" text-xs font-bold  ">Fitify</span>
-    </div>
-    <nav className="hidden flex flex-col space-x-6">
-      <a href="#" className="hover:text-primary-200 transition-colors ">Dashboard</a>
-      <a href="#" className="hover:text-primary-200 transition-colors">Exercises</a>
-      <a href="#" className="hover:text-primary-200 transition-colors">Challenges</a>
-    </nav>
-  </div>
-</div>   
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
+    <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        draggable />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
