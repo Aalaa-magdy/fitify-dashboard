@@ -5,10 +5,12 @@ import { Eye, EyeOff, Mail, Lock, LogIn } from 'lucide-react'
 import { useAuth } from '../context/AuthContext' // adjust path as needed
 import GradientButton from '../components/GradientButton'
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import PasswordInput from '../components/PasswordInput';
 
 
 export default function AdminLogin() {
-    const [showPassword, setShowPassword] = useState(false);
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useAuth();
@@ -22,7 +24,7 @@ export default function AdminLogin() {
       // Redirect to the stored path or default
       const redirectPath = localStorage.getItem('redirectPath') || from;
       localStorage.removeItem('redirectPath');
-      navigate(redirectPath, { replace: true });
+      navigate(redirectPath);
     });
   };
 
@@ -56,26 +58,13 @@ export default function AdminLogin() {
           </div>
 
           {/* Password Input */}
-          <div className="relative group">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-green-500 transition-colors" />
-            </div>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter Password"
-              className="w-full pl-10 pr-10 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-200"
-              required
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
-            >
-              {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-            </button>
-          </div>
+           <PasswordInput
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Your Password"
+        showStrengthMeter={true}
+        className="mb-4"
+      />
 
           {/* Forgot Password */}
           <div className="flex justify-end">

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Mail, ArrowLeft } from 'lucide-react';
 import GradientButton from '../components/GradientButton';
 
@@ -6,32 +7,36 @@ export default function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsLoading(false);
-    setIsSubmitted(true);
-    console.log('Reset link sent to:', email);
+    try {
+      // Simulate API call to send reset code
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      console.log('Reset code sent to:', email);
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Error sending reset code:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-lg space-y-6 animate-fade-in">
-        {/* Back button */}
-        <a 
-          href="/login" 
+        <button 
+          onClick={() => navigate('/login')}
           className="flex items-center text-gray-500 hover:text-gray-700 transition-colors duration-200"
         >
           <ArrowLeft className="h-5 w-5 mr-1" />
           Back to login
-        </a>
+        </button>
 
-        {/* Branding Header */}
         <div className="text-center space-y-3">
           <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-50 mb-3">
             <Mail className="h-6 w-6 text-green-600" />
@@ -39,8 +44,8 @@ export default function ForgotPassword() {
           <h2 className="text-3xl font-bold text-gray-900">Forgot Password?</h2>
           <p className="text-gray-500">
             {isSubmitted 
-              ? `We've sent a reset link to ${email}`
-              : "Enter your email to receive a reset link"}
+              ? `We've sent a reset code to ${email}`
+              : "Enter your email to receive a reset code"}
           </p>
         </div>
 
@@ -68,8 +73,10 @@ export default function ForgotPassword() {
 
             <GradientButton
               type="submit"
+              isLoading={isLoading}
+              className="w-full justify-center py-3 px-4"
             >
-                Send Reset Code
+              {isLoading ? 'Sending...' : 'Send Reset Code'}
             </GradientButton>
           </form>
         ) : (
@@ -80,21 +87,24 @@ export default function ForgotPassword() {
               </svg>
             </div>
             <p className="text-gray-600 mb-4">
-              Check your inbox for instructions to reset your password.
+              Check your inbox for the reset code.
             </p>
-            <p className="text-sm text-gray-500">
-              Didn't receive an email?{' '}
+            <div className="space-y-4">
+              <GradientButton
+                onClick={() => navigate(`/reset-password?email=${encodeURIComponent(email)}`)}
+                className="w-full justify-center py-3 px-4"
+              >
+                Enter Reset Code
+              </GradientButton>
               <button 
                 onClick={() => setIsSubmitted(false)}
-                className="text-green-600 font-medium hover:underline focus:outline-none"
+                className="text-sm text-green-600 font-medium hover:underline focus:outline-none"
               >
-                Try again
+                Didn't receive code? Try again
               </button>
-            </p>
+            </div>
           </div>
         )}
-
-      
       </div>
     </div>
   );

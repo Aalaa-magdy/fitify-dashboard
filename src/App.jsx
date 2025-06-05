@@ -1,33 +1,38 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './pages/AdminLogin';
 import DashboardLayout from './pages/DashboardLayout';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword'
 import Workouts from './features/workouts/Workouts';
 import Home from './features/home/Home';
+import AdminLogin from './pages/AdminLogin';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+   <BrowserRouter>
+  <AuthProvider>
+    <Routes>
+      {/* Public Routes */}
+      <Route path="/login" element={<AdminLogin />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
 
-          <Route element={<ProtectedRoute />}>
-            {/* Use empty path for layout route */}
-            <Route element={<DashboardLayout />}>
-              <Route index element={<Home />} /> {/* This handles the root path */}
-              <Route path="/dashboard" element={<Home />} />
-              <Route path="/workouts" element={<Workouts />} />
-              {/* Add other routes here */}
-            </Route>
-          </Route>
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
+      {/* Protected Routes with Layout */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/" element={<DashboardLayout />}>
+          <Route index element={<Home />} />
+          <Route path="dashboard" element={<Home />} />
+          <Route path="workouts" element={<Workouts />} />
+          {/* Add more nested routes here */}
+        </Route>
+      </Route>
+    </Routes>
+    <ToastContainer />
+  </AuthProvider>
+</BrowserRouter>
+
   );
 }
