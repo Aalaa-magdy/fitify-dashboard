@@ -8,16 +8,18 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#f8f9e8',
-          100: '#f1f4d1',
-          200: '#e2f163',  // Light yellow (from your palette)
-          300: '#d4e83a',
-          400: '#c5df11',
-          500: '#8B8839',   // Dark yellow (from your palette)
-          600: '#6b6a2b',
-          700: '#4c4b1e',
+          50: '#eefabb',       // Lightest yellow-green
+          100: '#e5f891e6',     // Semi-transparent light yellow-green
+          200: '#e2f163',       // Bright yellow-green
+          300: '#d4e83a',       // Medium yellow-green
+          400: '#c5df11',       // Vibrant yellow-green
+          500: '#8B8839',       // Olive green
+          600: '#6b6a2b',       // Dark olive
+          700: '#4c4b1e',       // Darkest olive
         },
-        // Keep your existing colors
+        accent: {
+          500: '#14919B',       // Teal accent from login
+        },
         success: {
           500: '#10b981',
         },
@@ -28,9 +30,10 @@ export default {
           500: '#ef4444',
         },
       },
+      backgroundImage: {
+        'logo-gradient': 'linear-gradient(to right, #14919B, #E2F163)',
+      }
     },
   },
-  plugins: [
-    
-  ],
+  plugins: [],
 }

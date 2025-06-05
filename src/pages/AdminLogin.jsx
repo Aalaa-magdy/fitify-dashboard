@@ -4,18 +4,27 @@ import { useState } from 'react'
 import { Eye, EyeOff, Mail, Lock, LogIn } from 'lucide-react'
 import { useAuth } from '../context/AuthContext' // adjust path as needed
 import GradientButton from '../components/GradientButton'
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 export default function AdminLogin() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const { login } = useAuth()
+    const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || '/dashboard';
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    login(email, password) // Call your context login function
-  }
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    login(email, password).then(() => {
+      // Redirect to the stored path or default
+      const redirectPath = localStorage.getItem('redirectPath') || from;
+      localStorage.removeItem('redirectPath');
+      navigate(redirectPath, { replace: true });
+    });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
