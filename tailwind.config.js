@@ -17,6 +17,9 @@ export default {
           600: '#6b6a2b',
           700: '#4c4b1e',
         },
+        mainBlue: '#14919B',
+        mainYellow: '#E2F163',
+        mainGreen: '#828B39',
         // Keep your existing colors
         success: {
           500: '#10b981',

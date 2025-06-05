@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Eye, EyeOff, Mail, Lock, LogIn } from 'lucide-react'
 import { useAuth } from '../context/AuthContext' // adjust path as needed
 import GradientButton from '../components/GradientButton'
-
+import { Link } from 'react-router-dom'
 
 export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false)
@@ -70,12 +70,12 @@ export default function AdminLogin() {
 
           {/* Forgot Password */}
           <div className="flex justify-end">
-            <a
-              href="#"
+            <Link
+              to='/forgot-password'
               className="text-sm text-gray-500 hover:text-green-600 transition-colors"
             >
               Forgot password?
-            </a>
+            </Link>
           </div>
         </div>
 
