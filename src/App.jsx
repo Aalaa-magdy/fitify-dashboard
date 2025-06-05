@@ -9,6 +9,7 @@ import ResetPassword from './pages/ResetPassword'
 import Workouts from './features/workouts/Workouts';
 import Home from './features/home/Home';
 import AdminLogin from './pages/AdminLogin';
+import AdminProfile from './features/settings/AdminProfile';
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="dashboard" element={<Home />} />
           <Route path="workouts" element={<Workouts />} />
+          <Route path="settings" element={<AdminProfile />} />
           {/* Add more nested routes here */}
         </Route>
       </Route>

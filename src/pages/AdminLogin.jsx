@@ -62,7 +62,7 @@ export default function AdminLogin() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Your Password"
-        showStrengthMeter={true}
+        showStrengthMeter={false}
         className="mb-4"
       />
 
