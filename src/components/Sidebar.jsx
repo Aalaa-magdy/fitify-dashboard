@@ -16,8 +16,8 @@ const Sidebar = ({ onLogout }) => {
     <div className="hidden  md:flex md:flex-shrink-0">
       <div className="flex flex-col w-72 h-screen border-r  border-gray-200 bg-white shadow-lg">
         {/* Logo with Glow Effect */}
-        <div className="flex items-center justify-center h-18 px-4 my-8">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#14919B] to-[#4ade80] font-bold text-5xl hover:from-[#4ade80] hover:to-[#14919B] transition-all duration-500 hover:drop-shadow-[0_0_8px_rgba(74,222,128,0.6)]">
+        <div className="flex items-center justify-center h-24  my-8">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#14919B] to-[#4ade80] font-bold text-6xl hover:from-[#4ade80] hover:to-[#14919B] transition-all duration-500 hover:drop-shadow-[0_0_8px_rgba(74,222,128,0.6)]">
             Fitify
           </span>
         </div>
@@ -30,7 +30,7 @@ const Sidebar = ({ onLogout }) => {
                 key={item.name}
                 to={item.path}
                 className={({ isActive }) => `
-                  flex w-full  items-center px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 
+                  flex w-full  items-center px-4 py-3 text-[17px] font-medium rounded-lg transition-all duration-300 
                   ${isActive 
                     ? 'bg-gradient-to-r from-green-100 to-green-50 text-green-700 shadow-inner shadow-green-200/50 border-l-4 border-green-400' 
                     : 'text-gray-600 hover:bg-gradient-to-r hover:from-green-50 hover:to-white hover:text-green-700 hover:shadow-md hover:shadow-green-200/30 hover:border-l-4 hover:border-green-300'}
