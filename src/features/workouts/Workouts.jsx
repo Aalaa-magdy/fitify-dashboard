@@ -119,7 +119,7 @@ const Workouts = () => {
       />
 
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Workout Programs</h1>
+        <h1 className="text-3xl font-bold text-[#1e6164]">Workout Programs</h1>
         <GradientButton
           onClick={() => setShowAddModal(true)}
           className='mr-20 py-[10px] w-[160px]'
