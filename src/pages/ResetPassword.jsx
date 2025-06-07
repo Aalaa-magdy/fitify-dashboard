@@ -1,148 +1,180 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Lock, Key, Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {  ArrowLeft } from 'lucide-react';
 import GradientButton from '../components/GradientButton';
 import PasswordInput from '../components/PasswordInput';
-
+import axios from '../api/axiosInstance'
+import { toast } from 'react-toastify';
 
 export default function ResetPassword() {
   const navigate = useNavigate();
-  const location = useLocation();
+
+  // Form step: 1 = verify code, 2 = set new password
+  const [step, setStep] = useState(1);
+
+  // Step 1 state
+  const [email, setEmail] = useState('');
   const [resetCode, setResetCode] = useState('');
+  const [isVerifying, setIsVerifying] = useState(false);
+
+  // Step 2 state
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [email, setEmail] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
 
-  useEffect(() => {
-    // Extract email from URL query params
-    const searchParams = new URLSearchParams(location.search);
-    const emailParam = searchParams.get('email');
-    if (emailParam) setEmail(decodeURIComponent(emailParam));
-  }, [location.search]);
+  // Shared
+  
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = async (e) => {
+  // Step 1: Verify email + reset code
+  const handleVerifyCode = async (e) => {
     e.preventDefault();
-    setError('');
+    setSuccessMessage('');
+    setIsVerifying(true);
 
-    if (password !== confirmPassword) {
-      setError("Passwords don't match");
-      return;
-    }
-
-    setIsLoading(true);
-    
     try {
-      // Simulate API call to reset password
-      await new Promise(resolve => setTimeout(resolve, 1500));
       
-      console.log('Password reset successful for:', email);
-      setIsSuccess(true);
+     const response = await axios.post('/users/check-otp', { email, resetCode });
+     console.log(response)
+      setStep(2);
     } catch (err) {
-      setError(err.message || 'Failed to reset password');
+      toast.error(err.message || 'Failed to verify reset code.');
+     
     } finally {
-      setIsLoading(false);
+      setIsVerifying(false);
     }
   };
 
-  if (isSuccess) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4">
-        <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-lg space-y-6 text-center">
-          <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
-            <svg className="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900">Password Reset Successful!</h2>
-          <p className="text-gray-600">
-            Your password has been updated successfully.
-          </p>
-          <div className="pt-4">
-            <GradientButton
-              onClick={() => navigate('/login')}
-              className="w-full justify-center py-3 px-4"
-            >
-              Return to Login
-            </GradientButton>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // Step 2: Reset password
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    setSuccessMessage('');
+
+    if (!password || !confirmPassword) {
+      toast.error('Please fill in both password fields.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match.');
+      return;
+    }
+
+    setIsResetting(true);
+
+    try {
+      const response = await axios.post("/users/reset-password",{email, newPassword: password})
+      console.log(response);
+
+      setSuccessMessage('Password reset successful! Redirecting to login...');
+      
+      // Optional: Redirect after a delay
+      setTimeout(() => {
+        navigate('/login');
+      }, 1000);
+    } catch (err) {
+      toast.error(err.message || 'Failed to reset password.');
+    } finally {
+      setIsResetting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-lg space-y-6 animate-fade-in">
-        <button 
-          onClick={() => navigate('/forgot-password')}
-          className="flex items-center text-gray-500 hover:text-gray-700 transition-colors duration-200"
-        >
-          <ArrowLeft className="h-5 w-5 mr-1" />
-          Back
-        </button>
-
-        <div className="text-center space-y-3">
-          <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-50 mb-3">
-            <Key className="h-6 w-6 text-blue-600" />
-          </div>
-          <h2 className="text-3xl font-bold text-gray-900">Reset Password</h2>
-          <p className="text-gray-500">Enter the code sent to {email} and your new password</p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="space-y-2">
-            <label htmlFor="resetCode" className="block text-sm font-medium text-gray-700">
-              Reset Code
-            </label>
-            <div className="relative group">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <Key className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+        
+        {step === 1 && (
+          <>
+            <button
+              onClick={() => navigate('/forgot-password')}
+              className="flex items-center text-gray-500 hover:text-gray-700 transition-colors duration-200"
+            >
+              <ArrowLeft className="h-5 w-5 mr-1" />
+              Back
+            </button>
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">Verify Reset Code</h2>
+            <form onSubmit={handleVerifyCode} className="space-y-5">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder="you@example.com"
+                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+                />
               </div>
-              <input
-                id="resetCode"
-                type="text"
-                value={resetCode}
-                onChange={(e) => setResetCode(e.target.value)}
-                required
-                placeholder="Enter 6-digit code"
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+
+              <div>
+                <label htmlFor="resetCode" className="block text-sm font-medium text-gray-700 mb-1">
+                  Reset Code
+                </label>
+                <input
+                  id="resetCode"
+                  type="text"
+                  value={resetCode}
+                  onChange={(e) => setResetCode(e.target.value)}
+                  required
+                  placeholder="Enter the code sent to your email"
+                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+                />
+              </div>
+
+
+              <GradientButton
+                type="submit"
+                className="w-full py-3 px-4 justify-center"
+              >
+                {isVerifying ? 'Verifying...' : 'Verify Code'}
+              </GradientButton>
+            </form>
+          </>
+        )}
+
+        {step === 2 && (
+          <>
+            <button
+              onClick={() => setStep(1)}
+              className="flex items-center text-gray-500 hover:text-gray-700 transition-colors duration-200"
+            >
+              <ArrowLeft className="h-5 w-5 mr-1" />
+              Back to Code Verification
+            </button>
+
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">Set New Password</h2>
+            <form onSubmit={handleResetPassword} className="space-y-5">
+              <PasswordInput
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="New Password"
+                showStrengthMeter={true}
+                className="mb-4"
               />
-            </div>
-          </div>
 
-          <PasswordInput
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="New Password"
-        showStrengthMeter={true}
-        className="mb-4"
-      />
+              <PasswordInput
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirm New Password"
+                showStrengthMeter={true}
+                className="mb-4"
+              />
 
-        <PasswordInput
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        placeholder="New Password"
-        showStrengthMeter={true}
-        className="mb-4"
-      />
+              {successMessage && (
+                <div className="text-green-600 text-sm bg-green-50 rounded p-2">{successMessage}</div>
+              )}
 
-          {error && (
-            <div className="text-red-500 text-sm py-2 px-3 bg-red-50 rounded-lg">
-              {error}
-            </div>
-          )}
-
-          <GradientButton
-            type="submit"
-            isLoading={isLoading}
-            className="w-full justify-center py-3 px-4 mt-4"
-          >
-            {isLoading ? 'Resetting...' : 'Reset Password'}
-          </GradientButton>
-        </form>
+              <GradientButton
+                type="submit"
+                className="w-full py-3 px-4 justify-center"
+              >
+                {isResetting ? 'Resetting Password...' : 'Reset Password'}
+              </GradientButton>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );

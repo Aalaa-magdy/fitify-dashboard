@@ -1,7 +1,7 @@
 // src/pages/Login
 
 import { useState } from 'react'
-import { Eye, EyeOff, Mail, Lock, LogIn } from 'lucide-react'
+import { Mail, LogIn } from 'lucide-react'
 import { useAuth } from '../context/AuthContext' // adjust path as needed
 import GradientButton from '../components/GradientButton'
 import { useLocation, useNavigate } from 'react-router-dom';

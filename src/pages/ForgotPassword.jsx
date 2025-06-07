@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, ArrowLeft } from 'lucide-react';
 import GradientButton from '../components/GradientButton';
+import axios from '../api/axiosInstance'
+import {toast} from 'react-toastify'
+
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -9,22 +12,24 @@ export default function ForgotPassword() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    try {
-      // Simulate API call to send reset code
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      console.log('Reset code sent to:', email);
-      setIsSubmitted(true);
-    } catch (error) {
-      console.error('Error sending reset code:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+
+  try {
+    const response = await axios.post('/users/forgot-password', {email});
+    console.log(response)
+    setIsSubmitted(true);
+  } catch (error) {
+    console.error('Error sending reset code:', error.response?.data?.message || error.message);
+    toast.error(error.response?.data?.message || 'Something went wrong');
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4">
@@ -73,7 +78,6 @@ export default function ForgotPassword() {
 
             <GradientButton
               type="submit"
-              isLoading={isLoading}
               className="w-full justify-center py-3 px-4"
             >
               {isLoading ? 'Sending...' : 'Send Reset Code'}
