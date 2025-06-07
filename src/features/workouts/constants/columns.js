@@ -1,19 +1,16 @@
 export const columns = [
      {
-      title :"ID",
-      key : "_id",
-     },{
-      title :"Name",
+      label :"Workout Name",
       key :"name",
+      type : "text"
      },{
-      title:"Image",
-      key :"imageUrl"
+      label:"Image",
+      key :"imageUrl",
+      type : "text"
      }
      ,{
-      title:"Description",
-      key :"description"
-     },{
-      title :"Exercises",
-      key :"exercises"
+      label:"Description",
+      key :"description",
+      type : "textarea"
      }
 ]
