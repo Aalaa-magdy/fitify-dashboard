@@ -37,7 +37,6 @@ const UserTable = () => {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold text-gray-800">User Management</h1>
         <GradientButton 
-          variant="primary"
           className='w-40'
           onClick={() => console.log('Add user clicked')}
         >

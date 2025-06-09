@@ -12,9 +12,9 @@ export const columns = [
           className="w-10 h-10 rounded-full object-cover"
         />
       ) : (
-        <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-          <User className="w-6 h-6 text-gray-400" />
-        </div>
+        <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 font-semibold select-none">
+        {row.name.charAt(0).toUpperCase() || <User />}
+      </div>
       ),
   },
   {

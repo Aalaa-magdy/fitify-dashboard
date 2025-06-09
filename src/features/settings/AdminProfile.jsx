@@ -10,6 +10,9 @@ import * as helpers from './utils/helpers';
 import { AddModal } from '../../components/AddModal';
 import { EditModal } from '../../components/EditModal';
 import axios from '../../api/axiosInstance'
+import UserMenuModal from '../../components/UserMenuModal';
+import UserPostsModal from '../../components/UserPostsModal';
+
 
 
 export const AdminProfile = () => {
@@ -18,6 +21,10 @@ export const AdminProfile = () => {
   const [showEditPass, setShowEditPass] = useState(false);
   const [showEditInfo, setShowEditInfo] = useState(false);
   const fileInputRef = useRef(null);
+  const [showUserModal, setShowUserModal] = useState(false);
+  const [modalData, setModalData] = useState({ users: [], title: '' });
+  const [postsData, setPostsData] = useState(null);
+  const [showPostModal, setShowPostModal]= useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,9 +71,34 @@ export const AdminProfile = () => {
     }
   };
 
-  const handleStatClick = (statName) => {
-    console.log(`${statName} clicked`);
-  };
+
+
+const handleStatClick = async (statName) => {
+    if (statName.toLowerCase() === 'posts') {
+    try {
+      const res = await axios.get(`/community/user-posts`);
+      const posts = res.data.data;
+      setPostsData(posts);
+      setShowPostModal(true);
+    } catch (error) {
+      console.error(error);
+      toast.error(`Failed to load posts`);
+    }
+  }
+  else {
+ setShowUserModal(true);
+  try {
+    const res = await axios.get(`/users/${statName.toLowerCase()}`);
+    const users = res.data.data;
+    setModalData({users: users, title: statName})
+    setShowUserModal(true);
+  } catch (error) {
+    console.error(error);
+    toast.error(`Failed to load ${statName}`);
+  }
+  }
+ 
+};
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -101,15 +133,20 @@ export const AdminProfile = () => {
       </motion.h1>
 
       <motion.div variants={itemVariants}>
-        <ProfileCard
-          avatarUrl={admin?.profilePic || "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"}
-          name={admin?.name}
-          role="Admin"
-          email={admin?.email}
-          gender={admin?.gender}
-          age={admin?.age}
-          onAvatarChange={handleAvatarChange}
-        />
+      <ProfileCard
+  avatarUrl={admin?.profilePic}
+  name={admin?.name}
+  role="Admin"
+  email={admin?.email}
+  gender={admin?.gender}
+  age={admin?.age}
+  onAvatarChange={handleAvatarChange}
+  points={admin?.points || 0}
+  activityLevel={admin?.activityLevel}
+  fitnessGoal={admin?.fitnessGoal }
+  weight={admin?.weight }
+  height={admin?.height }
+/>
       </motion.div>
 
       <motion.div
@@ -117,13 +154,13 @@ export const AdminProfile = () => {
         className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8"
       >
         <motion.div variants={itemVariants}>
-          <StatsCard value={45} label="Posts" onClick={() => handleStatClick('Posts')} />
+          <StatsCard value={admin?.posts?.length} label="Posts" onClick={() => handleStatClick('Posts')} />
         </motion.div>
         <motion.div variants={itemVariants}>
-          <StatsCard value="1.2K" label="Followers" onClick={() => handleStatClick('Followers')} />
+          <StatsCard value={admin?.followers?.length || 0} label="Followers" onClick={() => handleStatClick('Followers')} />
         </motion.div>
         <motion.div variants={itemVariants}>
-          <StatsCard value={86} label="Following" onClick={() => handleStatClick('Following')} />
+          <StatsCard value={admin?.following?.length|| 0} label="Following" onClick={() => handleStatClick('Following')} />
         </motion.div>
       </motion.div>
 
@@ -159,6 +196,25 @@ export const AdminProfile = () => {
       {showEditPass && (
         <EditModal onAdd={helpers.handleEditPass} onClose={() => setShowEditPass(false)} />
       )}
+      {showUserModal && (
+        <UserMenuModal
+          isOpen={showUserModal}
+          onClose={() => setShowUserModal(false)}
+          users={modalData.users}
+          title={modalData.title}
+        />
+      )}
+
+      {
+        showPostModal && (
+         <UserPostsModal 
+           isOpen={showPostModal}
+          onClose={() => setShowPostModal(false)}
+          posts={postsData}
+          title="My Posts"
+          />
+        )
+      }
     </motion.div>
   );
 };
