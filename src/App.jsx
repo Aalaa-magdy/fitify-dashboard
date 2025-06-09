@@ -10,6 +10,9 @@ import Workouts from './features/workouts/Workouts';
 import Home from './features/home/Home';
 import AdminLogin from './pages/AdminLogin';
 import AdminProfile from './features/settings/AdminProfile';
+
+import Exercises from './features/exercises/exercises';
+
 import UserTable from './features/users/UserTable';
 
 export default function App() {
@@ -27,6 +30,7 @@ export default function App() {
         <Route path="/" element={<DashboardLayout />}>
           <Route index element={<Home />} />
           <Route path="dashboard" element={<Home />} />
+          <Route path = "exercises" element={<Exercises/>}/>
           <Route path="workouts" element={<Workouts />} />
           <Route path="settings" element={<AdminProfile />} />
           <Route path="users" element={<UserTable />} />

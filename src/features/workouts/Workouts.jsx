@@ -5,6 +5,7 @@ import { AddModal } from '../../components/AddModal.jsx';
 import GradientButton from '../../components/GradientButton.jsx';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingSpinner from '../../components/LoadingSpinner.jsx';
 
 const Workouts = () => {
   const [workouts, setWorkouts] = useState([]);
@@ -45,7 +46,7 @@ const Workouts = () => {
     }
   };
 
-  // Handle updating a workout
+  // Handle updating a exercise
   const handleUpdate = async (id, formData) => {
     try {
       const updatedWorkout = await updateWorkout(id, formData);
@@ -74,12 +75,7 @@ const Workouts = () => {
   };
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#14919B]"></div>
-        <span className="ml-3 text-gray-600">Loading workouts...</span>
-      </div>
-    );
+    return <LoadingSpinner/>
   }
 
   if (error) {
@@ -108,7 +104,7 @@ const Workouts = () => {
       {/* Toast Container */}
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -118,17 +114,17 @@ const Workouts = () => {
         pauseOnHover
       />
 
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-[#1e6164]">Workout Programs</h1>
-        <GradientButton
+      <div className="flex  justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold text-[#266c6f]">Workout Programs</h1>
+        <button
           onClick={() => setShowAddModal(true)}
-          className='mr-20 py-[10px] w-[160px]'
+          className='p-2 w-[190px] bg-[#ecf87e] flex flex-row justify-center text-[18px] rounded-xl font-bold items-center border-2 border-[#edfc6b] '
         >
-          <svg className="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <svg className="-ml-1 mr-2 h-5 w-5 font-semibold " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
           </svg>
           New Workout
-        </GradientButton>
+        </button>
       </div>
 
       {workouts?.length === 0 ? (
@@ -151,7 +147,7 @@ const Workouts = () => {
           <p className="mt-1 text-gray-500">Get started by creating a new workout program.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-6">
           {workouts.map((workout) => (
             <WorkoutCard 
               key={workout._id} 
