@@ -47,4 +47,4 @@ export default function Table({
   )
 }
 
-// Example usage:
+
