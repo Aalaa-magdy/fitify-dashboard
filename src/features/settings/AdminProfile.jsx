@@ -7,11 +7,12 @@ import { motion } from 'framer-motion';
 import { getMyProfile } from './api/settingsApi';
 import { toast } from 'react-toastify';
 import * as helpers from './utils/helpers';
-import { AddModal } from '../../components/AddModal';
-import { EditModal } from '../../components/EditModal';
 import axios from '../../api/axiosInstance'
 import UserMenuModal from '../../components/UserMenuModal';
 import UserPostsModal from '../../components/UserPostsModal';
+import { AddAdminModal } from '../../components/AddAdminModal';
+import ChangePasswordModal from '../../components/ChangePasswordModal';
+import UpdateInfoModal from '../../components/UpdateInfoModal';
 
 
 
@@ -46,18 +47,16 @@ export const AdminProfile = () => {
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
+    console.log(file)
     if (!file) return;
 
     const formData = new FormData();
     formData.append("image", file);
 
     try {
-      const response = await axios("/users/profile-picture", {
-        method: "PATCH",
-        body: formData,
-      });
+    const response = await axios.patch("/users/profile-picture", formData); 
        console.log(response)
-      const data = await response.json();
+      const data = await response.data;
     
       if (response.ok) {
         setAdmin((prev) => ({ ...prev, profilePic: data.user.profilePic }));
@@ -164,37 +163,59 @@ const handleStatClick = async (statName) => {
         </motion.div>
       </motion.div>
 
-      <motion.div variants={containerVariants} className="flex flex-col lg:flex-row gap-4 mt-8">
-        <motion.div variants={itemVariants} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-          <GradientButton className="lg:w-60" onClick={() => setShowAddModal(true)}>
-            <FiPlus size={18} className="mr-2" />
-            Add New Admin
-          </GradientButton>
-        </motion.div>
+   <motion.div variants={containerVariants} className="flex flex-col lg:flex-row gap-4 mt-8">
+  <motion.div
+    variants={itemVariants}
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.98 }}
+  >
+    <button
+      onClick={() => setShowAddModal(true)}
+      className="lg:w-60 flex items-center justify-center gap-2 bg-secondYellow text-gray-800 font-semibold py-2.5 px-4 rounded-2xl shadow-md hover:bg-yellow-400 transition-all duration-300"
+    >
+      <FiPlus size={18} />
+      Add New Admin
+    </button>
+  </motion.div>
 
-        <motion.div variants={itemVariants} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-          <GradientButton className="lg:w-60" onClick={() => setShowEditPass(true)}>
-            <FiLock size={18} className="mr-2" />
-            Change Password
-          </GradientButton>
-        </motion.div>
+  <motion.div
+    variants={itemVariants}
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.98 }}
+  >
+    <button
+      onClick={() => setShowEditPass(true)}
+      className="lg:w-60 flex items-center justify-center gap-2 bg-secondYellow text-gray-800 font-semibold py-2.5 px-4 rounded-2xl shadow-md hover:bg-yellow-400 transition-all duration-300"
+    >
+      <FiLock size={18} />
+      Change Password
+    </button>
+  </motion.div>
 
-        <motion.div variants={itemVariants} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-          <GradientButton className="lg:w-60" onClick={() => setShowEditInfo(true)}>
-            <FiEdit size={18} className="mr-2" />
-            Update My Info
-          </GradientButton>
-        </motion.div>
-      </motion.div>
+  <motion.div
+    variants={itemVariants}
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.98 }}
+  >
+    <button
+      onClick={() => setShowEditInfo(true)}
+      className="lg:w-60 flex items-center justify-center gap-2 bg-secondYellow text-gray-800 font-semibold py-2.5 px-4 rounded-2xl shadow-md hover:bg-yellow-400 transition-all duration-300"
+    >
+      <FiEdit size={18} />
+      Update My Info
+    </button>
+  </motion.div>
+</motion.div>
+
 
       {showAddModal && (
-        <AddModal onAdd={helpers.handleAddNewAdmin} onClose={() => setShowAddModal(false)} />
+        <AddAdminModal onAdd={helpers.handleAddNewAdmin} onClose={() => setShowAddModal(false)} />
       )}
       {showEditInfo && (
-        <EditModal onAdd={helpers.handleEditInfo} onClose={() => setShowEditInfo(false)} />
+        <UpdateInfoModal onAdd={helpers.handleEditInfo} onClose={() => setShowEditInfo(false)} />
       )}
       {showEditPass && (
-        <EditModal onAdd={helpers.handleEditPass} onClose={() => setShowEditPass(false)} />
+        <ChangePasswordModal onAdd={helpers.handleEditPass} onClose={() => setShowEditPass(false)} />
       )}
       {showUserModal && (
         <UserMenuModal

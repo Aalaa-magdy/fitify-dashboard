@@ -1,5 +1,5 @@
 import { User } from 'lucide-react';
-import { renderProfilePic } from '../utils/ProfilePic';
+import UserAvatar from './UserAvatar';
 
 const UserMenuModal = ({ isOpen, onClose, users, title }) => {
   if (!isOpen) return null;
@@ -26,7 +26,7 @@ const UserMenuModal = ({ isOpen, onClose, users, title }) => {
                 key={user._id}
                 className="flex items-center gap-3 p-3 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200"
               >
-              {renderProfilePic(user)}
+             <UserAvatar user={user} />
 
                 <div className="flex flex-col">
                   <span className="font-medium">{user.name}</span>
