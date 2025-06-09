@@ -17,7 +17,7 @@ const Sidebar = ({ onLogout }) => {
       <div className="flex flex-col w-72 h-screen border-r border-gray-200 bg-white shadow-lg">
         {/* Logo with Glow Effect */}
         <div className="flex items-center justify-center h-18 my-2">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5dc2c9] to-[#e3f542] font-bold p-5 text-5xl hover:drop-shadow-[0_0_8px_rgba(20,145,155,0.6)] transition-all duration-500">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#61d0d8fb] to-[#e3f542] font-bold p-5 text-5xl hover:drop-shadow-[0_0_8px_rgba(20,145,155,0.6)] transition-all duration-500">
             Fitify
           </span>
         </div>
