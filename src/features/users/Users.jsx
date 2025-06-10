@@ -40,7 +40,7 @@ const Users = () => {
       <ToastContainer position="top-right" autoClose={3000} />
 
       {/* Sidebar */}
-      <div className={`w-full md:w-[40%] border-r border-gray-200 bg-white transition-all ${selectedUser ? 'hidden md:block' : ''}`}>
+      <div className={`w-full pb-10 md:w-[40%] border-r border-gray-200 bg-white transition-all ${selectedUser ? 'hidden md:block' : ''}`}>
         <div className="p-4 border-b shadow-sm bg-white sticky top-0 z-10">
           <div className="flex justify-between items-center mb-4">
             <h1 className="text-2xl font-bold text-[#14919B]">Users</h1>

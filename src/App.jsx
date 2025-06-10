@@ -12,6 +12,8 @@ import AdminLogin from './pages/AdminLogin';
 import AdminProfile from './features/settings/AdminProfile';
 import Exercises from './features/exercises/exercises';
 import Users from './features/users/Users';
+import Challenges from './features/challenges/Challenges'
+
 
 export default function App() {
   return (
@@ -28,6 +30,7 @@ export default function App() {
         <Route path="/" element={<DashboardLayout />}>
           <Route index element={<Home />} />
           <Route path="dashboard" element={<Home />} />
+          <Route path= "challenges" element={<Challenges/>}/>
           <Route path = "exercises" element={<Exercises/>}/>
           <Route path="workouts" element={<Workouts />} />
           <Route path="settings" element={<AdminProfile />} />
