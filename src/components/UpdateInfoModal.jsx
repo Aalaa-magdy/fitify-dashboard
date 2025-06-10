@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import { getMyProfile } from '../features/settings/api/settingsApi';
 
-const UpdateInfoModal = ({ onClose, onUpdate }) => {
+const UpdateInfoModal = ({ onUpdate , onClose}) => {
   const [form, setForm] = useState({
     name: '',
     age: '',
@@ -14,10 +15,11 @@ const UpdateInfoModal = ({ onClose, onUpdate }) => {
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedData = localStorage.getItem('userProfile');
+    const savedData = localStorage.getItem('admin');
     if (savedData) {
       try {
         const parsedData = JSON.parse(savedData);
+        console.log("data of admin", parsedData)
         setForm({
           name: parsedData.name || '',
           age: parsedData.age || '',
@@ -37,10 +39,11 @@ const UpdateInfoModal = ({ onClose, onUpdate }) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = () => {
-    // Optionally save updated data back to localStorage
-    localStorage.setItem('userProfile', JSON.stringify(form));
+  const handleSubmit = async () => {
     onUpdate(form);
+    const data = await getMyProfile();
+    localStorage.setItem('admin', JSON.stringify(data));
+    onClose();
   };
 
   return (
@@ -106,23 +109,29 @@ const UpdateInfoModal = ({ onClose, onUpdate }) => {
             >
               <option value="">Select Activity Level</option>
               <option value="sedentary">Sedentary</option>
-              <option value="light">Light</option>
-              <option value="moderate">Moderate</option>
               <option value="active">Active</option>
-              <option value="very active">Very Active</option>
+              <option value="highly active">Highly Active</option>
+              
+              
             </select>
           </div>
 
           {/* Fitness Goal */}
+            {/* Activity Level */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Fitness Goal</label>
-            <input
-              type="text"
+            <select
               value={form.fitnessGoal}
               onChange={(e) => handleChange('fitnessGoal', e.target.value)}
-              placeholder="Lose fat, build muscle, etc."
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#14919B]"
-            />
+            >
+              <option value="">Select Fitness Goal</option>
+              <option value="lose weight">Lose weight</option>
+              <option value="build muscle">Build muscle</option>
+              <option value="highly active">maintain fitness</option>
+              
+              
+            </select>
           </div>
 
           {/* Weight */}

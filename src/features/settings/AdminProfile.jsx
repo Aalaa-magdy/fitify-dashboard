@@ -4,9 +4,8 @@ import { StatsCard } from '../../components/StatsCard';
 import GradientButton from '../../components/GradientButton';
 import { FiPlus, FiLock, FiEdit } from 'react-icons/fi';
 import { motion } from 'framer-motion';
-import { getMyProfile } from './api/settingsApi';
+import { getMyProfile, addAdmin, editPassword, editInfo } from './api/settingsApi';
 import { toast } from 'react-toastify';
-import * as helpers from './utils/helpers';
 import axios from '../../api/axiosInstance'
 import UserMenuModal from '../../components/UserMenuModal';
 import UserPostsModal from '../../components/UserPostsModal';
@@ -209,13 +208,13 @@ const handleStatClick = async (statName) => {
 
 
       {showAddModal && (
-        <AddAdminModal onAdd={helpers.handleAddNewAdmin} onClose={() => setShowAddModal(false)} />
+        <AddAdminModal onAdd={addAdmin} onClose={() => setShowAddModal(false)} />
       )}
       {showEditInfo && (
-        <UpdateInfoModal onAdd={helpers.handleEditInfo} onClose={() => setShowEditInfo(false)} />
+        <UpdateInfoModal onUpdate={editInfo} onClose={() => setShowEditInfo(false)} />
       )}
       {showEditPass && (
-        <ChangePasswordModal onAdd={helpers.handleEditPass} onClose={() => setShowEditPass(false)} />
+        <ChangePasswordModal onChangePassword={editPassword} onClose={() => setShowEditPass(false)} />
       )}
       {showUserModal && (
         <UserMenuModal

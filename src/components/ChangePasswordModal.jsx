@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { X } from 'lucide-react';
 import PasswordInput from './PasswordInput'; // Make sure this path matches your project
 
-const ChangePasswordModal = ({ onClose, onChangePassword }) => {
+const ChangePasswordModal = ({ onChangePassword, onClose }) => {
   const [form, setForm] = useState({
     currentPassword: '',
-    newPassword: '',
+    password: '',
     confirmPassword: '',
   });
 
@@ -17,21 +17,19 @@ const ChangePasswordModal = ({ onClose, onChangePassword }) => {
   };
 
   const handleSubmit = () => {
-    if (!form.currentPassword || !form.newPassword || !form.confirmPassword) {
+    if (!form.currentPassword || !form.password || !form.confirmPassword) {
       setError('Please fill in all fields.');
       return;
     }
 
-    if (form.newPassword !== form.confirmPassword) {
+    if (form.password !== form.confirmPassword) {
       setError('New password and confirmation do not match.');
       return;
     }
 
     // Send passwords to parent handler
-    onChangePassword({
-      currentPassword: form.currentPassword,
-      newPassword: form.newPassword,
-    });
+    onChangePassword(form);
+    onClose();
   };
 
   return (
@@ -65,8 +63,8 @@ const ChangePasswordModal = ({ onClose, onChangePassword }) => {
             New Password
           </label>
           <PasswordInput
-            value={form.newPassword}
-            onChange={(e) => handleChange('newPassword', e.target.value)}
+            value={form.password}
+            onChange={(e) => handleChange('password', e.target.value)}
             placeholder="Enter new password"
             showStrengthMeter={true}
             className="mb-4"
