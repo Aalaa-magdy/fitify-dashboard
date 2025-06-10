@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ProfileCard } from '../../components/ProfileCard';
 import { StatsCard } from '../../components/StatsCard';
-import GradientButton from '../../components/GradientButton';
 import { FiPlus, FiLock, FiEdit } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 import { getMyProfile, addAdmin, editPassword, editInfo } from './api/settingsApi';
 import { toast } from 'react-toastify';
 import axios from '../../api/axiosInstance'
@@ -12,7 +10,7 @@ import UserPostsModal from '../../components/UserPostsModal';
 import { AddAdminModal } from '../../components/AddAdminModal';
 import ChangePasswordModal from '../../components/ChangePasswordModal';
 import UpdateInfoModal from '../../components/UpdateInfoModal';
-
+import { motion } from 'framer-motion';
 
 
 export const AdminProfile = () => {
@@ -133,17 +131,9 @@ const handleStatClick = async (statName) => {
       <motion.div variants={itemVariants}>
       <ProfileCard
   avatarUrl={admin?.profilePic}
-  name={admin?.name}
-  role="Admin"
-  email={admin?.email}
-  gender={admin?.gender}
-  age={admin?.age}
+  user={admin}
   onAvatarChange={handleAvatarChange}
-  points={admin?.points || 0}
-  activityLevel={admin?.activityLevel}
-  fitnessGoal={admin?.fitnessGoal }
-  weight={admin?.weight }
-  height={admin?.height }
+
 />
       </motion.div>
 
