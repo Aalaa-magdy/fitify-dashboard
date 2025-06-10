@@ -20,9 +20,10 @@ export default {
         accent: {
           500: '#14919B',       // Teal accent from login
         },
-        mainBlue: '#14919B',
-        mainYellow: '#E2F163',
+        mainBlue: '#14919B', 
+        mainYellow: '#E2F163',  
         mainGreen: '#828B39',
+        secondYellow: '#ecf87e',
         // Keep your existing colors
         success: {
           500: '#10b981',

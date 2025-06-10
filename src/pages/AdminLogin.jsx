@@ -78,7 +78,7 @@ export default function AdminLogin() {
         </div>
 
         {/* Login Button */}
-      <GradientButton type="submit">
+      <GradientButton type="submit" className='w-full'>
         <LogIn className="h-5 w-5" />
         Login
       </GradientButton>

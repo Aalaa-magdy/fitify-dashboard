@@ -11,7 +11,7 @@ export const StatsCard = ({ value, label, onClick }) => {
       <motion.span 
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="text-3xl font-bold text-blue-600"
+        className="text-3xl font-bold text-mainBlue"
       >
         {value}
       </motion.span>

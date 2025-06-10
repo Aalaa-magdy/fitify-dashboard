@@ -1,51 +1,86 @@
-// components/ProfileCard.js
+import { User } from "lucide-react";
 
-
-export const ProfileCard = ({ 
-  avatarUrl, 
-  name, 
-  role, 
-  email, 
-  gender, 
-  age, 
-  onAvatarChange 
+export const ProfileCard = ({
+  avatarUrl,
+  name,
+  role,
+  email,
+  gender,
+  age,
+  points,
+  activityLevel,
+  fitnessGoal,
+  weight,
+  height,
+  onAvatarChange,
 }) => {
   return (
-    <div className="flex flex-col md:flex-row items-center gap-6 p-6 bg-white rounded-xl shadow-sm">
+    <div className="bg-white rounded-xl shadow-md p-6 w-full flex flex-col md:flex-row items-center md:items-start gap-8">
+      {/* Avatar section */}
       <div className="flex flex-col items-center">
-        <img 
-          src={avatarUrl} 
-          alt="Profile" 
-          className="w-32 h-32 rounded-full object-cover border-4 border-blue-100"
-        />
+        {avatarUrl ? (
+          <img
+            src={avatarUrl}
+            alt="Profile"
+            className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-4 border-blue-200"
+          />
+        ) : (
+          <div className="w-28 h-28 md:w-32 md:h-32 flex items-center justify-center bg-blue-50 rounded-full border-4 border-blue-200">
+            <User className="w-12 h-12 text-mainBlue" />
+          </div>
+        )}
+
         <button
           onClick={onAvatarChange}
-          className="mt-3 px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
+          className="mt-4 px-4 py-2 text-sm font-medium text-mainBlue bg-blue-100 rounded-lg hover:bg-blue-200 transition"
         >
           Change Photo
         </button>
       </div>
 
-      <div className="flex-1">
-        <div className="flex items-center gap-2 mb-2">
-          <h1 className="text-2xl font-bold text-gray-800">{name}</h1>
-          <span className="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-100 rounded-full">
-            {role}
+      {/* Info Section */}
+      <div className="w-full flex-1 space-y-6">
+        {/* Name and Role */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <h1 className="text-2xl font-bold text-gray-800">{name || "Admin"}</h1>
+          <span className="mt-2 sm:mt-0 px-3 py-1 text-sm font-semibold text-blue-800 bg-blue-100 rounded-full">
+            {role || "Admin"}
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        {/* Info Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700">
           <div className="flex items-center gap-2">
-            <span className="text-gray-500">📧</span>
-            <span className="text-gray-700">{email}</span>
+            <span>📧</span>
+            <span>{email || "Not provided"}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-gray-500">🚻</span>
-            <span className="text-gray-700">{gender}</span>
+            <span>🚻</span>
+            <span>{gender || "Not specified"}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-gray-500">🎂</span>
-            <span className="text-gray-700">{age} years</span>
+            <span>🎂</span>
+            <span>{age != null ? `${age} years` : "N/A"}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span>🏅</span>
+            <span>{points != null ? `${points} pts` : "0 pts"}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span>🔥</span>
+            <span>{activityLevel || "No activity level set"}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span>🎯</span>
+            <span>{fitnessGoal || "No goal set"}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span>⚖️</span>
+            <span>{weight != null ? `${weight} kg` : "N/A"}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span>📏</span>
+            <span>{height != null ? `${height} cm` : "N/A"}</span>
           </div>
         </div>
       </div>
