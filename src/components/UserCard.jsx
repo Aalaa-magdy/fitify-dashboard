@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { StatsCard } from './StatsCard';
 import UserMenuModal from './UserMenuModal';
-
+import UserChartProgress from './UserProgressChart'
 const UserCard = ({ user }) => {
 
     const [showUserModal, setShowUserModal] = useState(false);
@@ -75,6 +75,8 @@ const UserCard = ({ user }) => {
           <StatsCard value={user?.following?.length|| 0} label="Following" onClick={() => handleStatClick('Following')} />
         </motion.div>
       </motion.div>
+       
+       <UserChartProgress  user={user} />
 
       {showUserModal && (
         <UserMenuModal
