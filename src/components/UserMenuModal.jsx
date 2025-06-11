@@ -1,4 +1,4 @@
-import { User } from 'lucide-react';
+
 import UserAvatar from './UserAvatar';
 
 const UserMenuModal = ({ isOpen, onClose, users, title }) => {

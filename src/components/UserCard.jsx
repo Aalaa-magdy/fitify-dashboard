@@ -6,6 +6,9 @@ import { useState } from 'react';
 import { StatsCard } from './StatsCard';
 import UserMenuModal from './UserMenuModal';
 import UserChartProgress from './UserProgressChart'
+import UserPostsModal from './UserPostsModal';
+
+
 const UserCard = ({ user }) => {
 
     const [showUserModal, setShowUserModal] = useState(false);
@@ -16,7 +19,7 @@ const UserCard = ({ user }) => {
   const handleStatClick = async (statName) => {
     if (statName.toLowerCase() === 'posts') {
     try {
-      const res = await axios.get(`/community/user-posts`);
+      const res = await axios.get(`/community/user-posts/${user._id}`);
       const posts = res.data.data;
       setPostsData(posts);
       setShowPostModal(true);
@@ -28,7 +31,7 @@ const UserCard = ({ user }) => {
   else {
  setShowUserModal(true);
   try {
-    const res = await axios.get(`/users/${statName.toLowerCase()}`);
+    const res = await axios.get(`/users/${statName.toLowerCase()}/${user._id}`);
     const users = res.data.data;
     setModalData({users: users, title: statName})
     setShowUserModal(true);

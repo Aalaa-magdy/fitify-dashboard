@@ -1,13 +1,13 @@
-import React from "react";
+
 import { Dialog } from "@headlessui/react";
-import { X, User as UserIcon, ThumbsUp, Repeat, MessageCircle } from "lucide-react";
+import { X, ThumbsUp, Repeat, MessageCircle } from "lucide-react";
 import moment from "moment";
-import { renderProfilePic } from "../utils/ProfilePic";
+import UserAvatar from "./UserAvatar";
 
 
 const UserPostsModal = ({ isOpen, onClose, posts = [] }) => {
   if (!isOpen) return null;
-
+console.log("posts from post modal ", posts);
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
@@ -36,7 +36,7 @@ const UserPostsModal = ({ isOpen, onClose, posts = [] }) => {
                 >
                   {/* User Info */}
                   <div className="flex items-center gap-3 mb-3">
-                    {renderProfilePic(post.user)}
+                   <UserAvatar user={post?.user} />
                     <div>
                       <p className="font-semibold text-gray-900">{post.user.name}</p>
                       <p className="text-xs text-gray-500">

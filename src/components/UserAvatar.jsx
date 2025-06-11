@@ -1,5 +1,6 @@
 const UserAvatar = ({ user }) => {
-  return user.profilePic ? (
+  console.log("user from user avatar ", user)
+  return user?.profilePic ? (
     <img
       src={user.profilePic}
       alt={user.name}
@@ -7,7 +8,7 @@ const UserAvatar = ({ user }) => {
     />
   ) : (
     <div className="w-10 h-10 rounded-full  gradient-btn flex items-center justify-center text-white font-semibold text-xl shadow-sm">
-      {user.name.charAt(0).toUpperCase()}
+      {user?.name.charAt(0).toUpperCase()}
     </div>
   );
 };

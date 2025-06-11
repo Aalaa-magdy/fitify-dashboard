@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ProfileCard } from '../../components/ProfileCard';
 import { StatsCard } from '../../components/StatsCard';
 import { FiPlus, FiLock, FiEdit } from 'react-icons/fi';
@@ -72,7 +72,7 @@ export const AdminProfile = () => {
 const handleStatClick = async (statName) => {
     if (statName.toLowerCase() === 'posts') {
     try {
-      const res = await axios.get(`/community/user-posts`);
+      const res = await axios.get(`/community/user-posts/${admin._id}`);
       const posts = res.data.data;
       setPostsData(posts);
       setShowPostModal(true);
@@ -84,7 +84,7 @@ const handleStatClick = async (statName) => {
   else {
  setShowUserModal(true);
   try {
-    const res = await axios.get(`/users/${statName.toLowerCase()}`);
+    const res = await axios.get(`/users/${statName.toLowerCase()}/${admin._id}`);
     const users = res.data.data;
     setModalData({users: users, title: statName})
     setShowUserModal(true);
