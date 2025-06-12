@@ -139,7 +139,7 @@ const handleStatClick = async (statName) => {
 
       <motion.div
         variants={containerVariants}
-        className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8"
+        className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8 w-[70%]"
       >
         <motion.div variants={itemVariants}>
           <StatsCard value={admin?.posts?.length} label="Posts" onClick={() => handleStatClick('Posts')} />

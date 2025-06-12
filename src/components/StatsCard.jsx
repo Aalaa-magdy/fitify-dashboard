@@ -6,7 +6,7 @@ export const StatsCard = ({ value, label, onClick }) => {
     <motion.div
       onClick={onClick}
       whileHover={{ y: -5 }}
-      className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer"
+      className=" flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer  border-2 border-secondYellow"
     >
       <motion.span 
         animate={{ scale: [1, 1.05, 1] }}
