@@ -12,6 +12,9 @@ const Home = () => {
   const [exercises, setExercises] = useState(0);
   const [completedSessions, setCompletedSessions] = useState(0);
   const [genderData, setGenderData] = useState({males:0, females:0});
+  const [topUsers, setTopUsers] = useState(null);
+  const [lastLeaderboard, setLastLeaderboard] = useState(null);
+
   useEffect(()=>{
     const fetchStats = async ()=> {
       const res = await axios.get("/stats");
@@ -23,7 +26,22 @@ const Home = () => {
       setGenderData({males: data.males, females: data.females })
     }
 
+    const fetchTopTen = async () =>{
+      const res = await axios.get("/users/top-users");
+      const data = res.data.data;
+      setTopUsers(data);
+    }
+
+    const fetchLastLeaderboard  = async () => {
+      const res = await axios.get("/challenge-progress/leaderboard/last-session");
+      const data = res.data.data;
+      setLastLeaderboard(data);
+    }
+
     fetchStats();
+    fetchTopTen();
+    fetchLastLeaderboard();
+
   }, [])
 
  const stats = {
@@ -32,20 +50,7 @@ const Home = () => {
   exercises,
   completedSessions
  }
-  const topUsers = [
-    { id: 1, name: 'Alex Johnson', points: 2450, progress: 92 },
-    { id: 2, name: 'Sam Wilson', points: 1980, progress: 85 },
-    { id: 3, name: 'Jordan Lee', points: 1750, progress: 78 },
-    // ... (other top users)
-  ];
-
-  const lastLeaderboard = [
-    { id: 101, name: 'Emma Stone', position: 1, change: 'up' },
-    { id: 102, name: 'Chris Evans', position: 2, change: 'down' },
-    { id: 103, name: 'Taylor Swift', position: 3, change: 'up' },
-    { id: 104, name: 'John Doe', position: 4, change: 'new' },
-    { id: 105, name: 'Jane Smith', position: 5, change: 'same' },
-  ];
+ 
 
   // Color palette
   const colors = {
