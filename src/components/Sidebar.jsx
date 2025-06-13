@@ -2,7 +2,6 @@ import { NavLink } from 'react-router-dom';
 import { HomeIcon, UserIcon, FireIcon, UsersIcon, TrophyIcon, CogIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
 
 const Sidebar = ({ onLogout }) => {
-  console.log("from sidebar")
   const navItems = [
     { name: 'Dashboard', icon: HomeIcon, path: 'dashboard' },
     { name: 'Workouts', icon: FireIcon, path: 'workouts' },
@@ -13,43 +12,43 @@ const Sidebar = ({ onLogout }) => {
   ];
 
   return (
-    <div className="hidden md:flex md:flex-shrink-0">
-      <div className="flex flex-col w-72 h-screen border-r border-gray-200 bg-white shadow-lg">
-        {/* Logo with Glow Effect */}
-        <div className="flex items-center justify-center h-18 my-2">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#61d0d8fb] to-[#e3f542] font-bold p-5 text-5xl hover:drop-shadow-[0_0_8px_rgba(20,145,155,0.6)] transition-all duration-500">
+    <div className="hidden ml-7  md:flex md:flex-shrink-0 bg-gray-100 border-r border-gray-200 rounded-xl border-7 w-[13%] mt-3 mb-1">
+      <div className="flex flex-col w-64 h-screen  ">
+        {/* Logo - Simplified */}
+        <div className="flex items-center justify-center h-16 px-4 border-b border-gray-200">
+          <span className="text-xl font-semibold text-gray-800">
             Fitify
           </span>
         </div>
         
-        {/* Navigation */}
-        <div className="flex flex-col flex-grow px-7 py-4 overflow-y-auto">
-          <nav className="flex-1 space-y-2">
+        {/* Navigation - Cleaner Design */}
+        <div className="flex flex-col flex-grow px-2 py-4 overflow-y-auto">
+          <nav className="space-y-1">
             {navItems.map((item) => (
               <NavLink
                 key={item.name}
                 to={item.path}
                 className={({ isActive }) => `
-                  flex w-full items-center px-4 py-3 text-[15px] font-medium rounded-lg transition-all duration-300 
+                  flex items-center px-3 py-2.5 text-sm font-medium rounded-md mx-2
                   ${isActive 
-                    ? 'bg-gradient-to-r from-[#e0f7fa] to-[#b2ebf2] text-[#14919B] shadow-inner shadow-[#88f2fa]/50 border-l-4 border-[#14919B]' 
-                    : 'text-gray-600 hover:bg-gradient-to-r hover:from-[#f0fdff] hover:to-white hover:text-[#14919B] hover:shadow-md hover:shadow-[#88f2fa]/30 hover:border-l-4 hover:border-[#88f2fa]'}
+                    ? 'bg-gray-100 text-[#14919B]' 
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}
                 `}
               >
-                <item.icon className='w-6 h-6 mr-3' />
+                <item.icon className='w-5 h-5 mr-3' />
                 {item.name}
               </NavLink>
             ))}
           </nav>
         </div>
         
-        {/* Logout Button */}
+        {/* Logout Button - Bottom Aligned */}
         <div className="p-4 border-t border-gray-200">
           <button
             onClick={onLogout}
-            className="flex items-center w-full px-4 py-3 text-xl font-medium text-gray-600 rounded-lg hover:bg-gradient-to-r hover:from-[#f0fdff] hover:to-white hover:text-[#14919B] hover:shadow-md hover:shadow-[#88f2fa]/30 transition-all duration-300"
+            className="flex items-center w-full px-3 py-2.5 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900"
           >
-            <ArrowLeftOnRectangleIcon className="w-5 h-5 mr-3 text-gray-500" />
+            <ArrowLeftOnRectangleIcon className="w-5 h-5 mr-3" />
             Logout
           </button>
         </div>
