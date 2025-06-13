@@ -12,7 +12,7 @@ const Sidebar = ({ onLogout }) => {
   ];
 
   return (
-    <div className="hidden ml-7  md:flex md:flex-shrink-0 bg-gray-100 border-r border-gray-200 rounded-xl border-7 w-[13%] mt-3 mb-1">
+    <div className="hidden ml-7  md:flex md:flex-shrink-0 bg-gray-100 border-r border-gray-200 rounded-xl border-7  mt-3 mb-1">
       <div className="flex flex-col w-64 h-screen  ">
         {/* Logo - Simplified */}
         <div className="flex items-center justify-center h-16 px-4 border-b border-gray-200">

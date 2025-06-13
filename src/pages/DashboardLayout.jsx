@@ -8,7 +8,7 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex h-screen gap-8 bg-white">
-      <Sidebar onLogout={logout} />
+      <Sidebar onLogout={logout} className='w-[15%]'/>
       
       {/* Main content area */}
       <div className="flex-1 flex flex-col  overflow-hidden overflow-y-auto ">
