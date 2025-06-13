@@ -9,9 +9,9 @@ import { FiRefreshCw, FiAlertCircle } from 'react-icons/fi';
 
 // Matching the color palette from previous components
 const COLORS = {
-  mainBlue: '#0E7C86',
+  mainBlue: '#1297a3',
   mainYellow: '#D8E84E',
-  mainGreen: '#6B732A',
+  mainGreen: '#18d3a1',
   secondYellow: '#E0F06D',
   blueLight: '#D8F3F5',
   yellowLight: '#F5F9D5',
@@ -110,7 +110,7 @@ const UserAgeRunwayChart = () => {
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+    <div className="w-full  mx-auto bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-5">
         <div className="flex items-center space-x-3">
           <div 
