@@ -101,8 +101,8 @@ const UserCard = ({ user }) => {
   };
 
   return (
-    <div className="bg-gray-50 p-4 rounded-lg">
-      <div className="bg-white rounded-xl overflow-hidden shadow-sm mb-6 border border-gray-200">
+    <div className="bg-gray-50 p-2 rounded-lg">
+      <div className="bg-white rounded-xl overflow-hidden shadow-sm mb-6 border border-gray-100">
         <UserInfoSection user={user} />
       </div>
     

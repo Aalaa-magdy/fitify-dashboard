@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "../../api/axiosInstance";
 import LoadingSpinner from '../../components/LoadingSpinner';
+<<<<<<< HEAD
 import FitnessStats from "./components/FitnessStats";
 import CommunityStats from "./components/CommunityStats";
 import AllCharts from "./components/AllCharts";
@@ -9,6 +10,10 @@ import TopUsersChart from "./components/TopUserChart";
 import Leaderboard from "../../components/Leaderboard";
 import AllUsersProgressChart from "../../components/AllUsersProgressChart";
 import GenderPieChart from "../../components/GenderPieChart";
+=======
+import UserAvatar from '../../components/UserAvatar';
+import UserGrowthChart from "../../components/UserGrowthAreaChart";
+>>>>>>> a85ed4b6899af6c8f5cab69fa10b52073336327a
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -132,6 +137,7 @@ const Home = () => {
           </div>
         </div>
 
+<<<<<<< HEAD
         </div>
         
         {/* Charts Section */}
@@ -148,6 +154,10 @@ const Home = () => {
           
         </div>
       
+=======
+        <UserGrowthChart />
+
+>>>>>>> a85ed4b6899af6c8f5cab69fa10b52073336327a
       </main>
     </div>
   );
