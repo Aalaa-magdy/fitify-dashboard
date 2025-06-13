@@ -27,6 +27,7 @@ import {
 import { motion } from 'framer-motion';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import UserAvatar from '../../components/UserAvatar';
+import UserGrowthChart from "../../components/UserGrowthAreaChart";
 
 const Home = () => {
   // Fitness stats state
@@ -478,6 +479,8 @@ const Home = () => {
               
         
         </div>
+
+        <UserGrowthChart />
 
       </main>
     </div>
