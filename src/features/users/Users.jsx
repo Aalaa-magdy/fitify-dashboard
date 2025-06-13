@@ -92,8 +92,8 @@ const Users = () => {
 
       {/* Detail Panel */}
       {selectedUser ? (
-        <div className="flex-1 p-6 overflow-y-auto bg-gray-50">
-          <div className="max-w-3xl mx-auto bg-white shadow-xl rounded-2xl p-6">
+        <div className="flex-1 p-2 overflow-y-auto">
+          <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-4">
             <UserCard user={selectedUser} />
           </div>
         </div>
