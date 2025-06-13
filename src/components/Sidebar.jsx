@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { HomeIcon, UserIcon, FireIcon, UsersIcon, TrophyIcon, CogIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
+import logo from '../assets/log-1.png';
 
 const Sidebar = ({ onLogout }) => {
   const navItems = [
@@ -12,17 +13,15 @@ const Sidebar = ({ onLogout }) => {
   ];
 
   return (
-    <div className="hidden ml-7  md:flex md:flex-shrink-0 bg-gray-100 border-r border-gray-200 rounded-xl border-7  mt-3 mb-1">
+    <div className="hidden fixed ml-7  md:flex md:flex-shrink-0 bg-gray-100 mt-2 border-gray-300 rounded-xl border-7  mt-3 mb-1">
       <div className="flex flex-col w-64 h-screen  ">
         {/* Logo - Simplified */}
-        <div className="flex items-center justify-center h-16 px-4 border-b border-gray-200">
-          <span className="text-xl font-semibold text-gray-800">
-            Fitify
-          </span>
+        <div className="flex items-center justify-center mt-5 mb-2 px-4  border-gray-200">
+          <img src={logo} alt="Fitify Logo" className="h-28 w-44 mr-2" />
         </div>
         
         {/* Navigation - Cleaner Design */}
-        <div className="flex flex-col flex-grow px-2 py-4 overflow-y-auto">
+        <div className="flex flex-col flex-grow px-2 py-4 overflow-y-auto items-center">
           <nav className="space-y-1">
             {navItems.map((item) => (
               <NavLink

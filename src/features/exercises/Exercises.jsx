@@ -80,7 +80,7 @@ const Exercises = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen">
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -106,7 +106,7 @@ const Exercises = () => {
 
       {/* Exercise Detail View */}
       {selectedExercise ? (
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto ">
           <ExerciseCard
             key={selectedExercise._id}
             exercise={selectedExercise}
@@ -141,7 +141,7 @@ const EmptyDetailView = ({ onAddExercise }) => (
       </p>
       <button
         onClick={onAddExercise}
-        className="mt-4 px-4 py-2 bg-[#ecf87e] text-gray-800 rounded-lg hover:bg-[#d4e86b] transition-colors"
+        className="mt-4 px-4 py-2 bg-[#14919B] text-white  rounded-lg hover:bg-[#265e62] transition-colors"
       >
         <Plus size={16} className="inline mr-1" />
         Add Exercise

@@ -47,7 +47,7 @@ const ExerciseCard = ({ exercise, onDelete, onUpdate }) => {
   };
 
   return (
-    <div className="w-[89%] mx-auto p-6">
+    <div className="w-[90%] ml-8 bg-white p-3 rounded-xl">
       {/* Header with Back Button */}
       <div className="flex justify-between items-center mb-8">
         <button 
@@ -61,7 +61,7 @@ const ExerciseCard = ({ exercise, onDelete, onUpdate }) => {
         <div className="flex space-x-3">
           <button
             onClick={handleEditClick}
-            className="px-4 py-2 bg-[#ecf87e] text-gray-800 rounded-lg flex items-center hover:bg-[#e0eb71] transition-colors"
+            className="px-4 py-2 bg-[#14919B] text-white hover:bg-white hover:text-[#14919B] hover:border-1 hover:border-[#14919B]  rounded-lg flex items-center  transition-colors"
           >
             <Edit2 size={18} className="mr-2" />
             Edit
@@ -109,18 +109,19 @@ const ExerciseCard = ({ exercise, onDelete, onUpdate }) => {
           <p className="text-gray-600 mb-6">{exercise.description}</p>
           
           <div className="grid grid-cols-3 gap-6 mb-8">
-            <div className="bg-[#f0fdf4] p-4 rounded-lg border border-[#14919B]/20">
+            <div className="bg-white p-4 rounded-lg border border-[#14919B]/20">
               <h3 className="text-sm font-medium text-[#14919B] mb-1">Difficulty</h3>
               <p className="text-lg capitalize">{exercise.difficulty}</p>
             </div>
             
-            <div className="bg-[#f0fdf4] p-4 rounded-lg border border-[#14919B]/20">
+            <div className="bg-white p-4 rounded-lg border border-[#14919B]/20">
               <h3 className="text-sm font-medium text-[#14919B] mb-1">Equipment</h3>
+              {console.log(exercise)}
               <p className="text-lg capitalize">{exercise.equipment}</p>
             </div>
 
             {exercise.workoutName && (
-              <div className="bg-[#f0fdf4] p-4 rounded-lg border border-[#14919B]/20">
+              <div className="bg-white p-4 rounded-lg border border-[#14919B]/20">
                 <h3 className="text-sm font-medium text-[#14919B] mb-1">Workout</h3>
                 <p className="text-lg">{exercise.workoutName}</p>
               </div>

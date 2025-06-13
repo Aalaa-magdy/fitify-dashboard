@@ -8,10 +8,10 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex h-screen gap-8 bg-white">
-      <Sidebar onLogout={logout} className='w-[15%]'/>
+      <Sidebar onLogout={logout} className=' w-[80px]'/>
       
       {/* Main content area */}
-      <div className="flex-1 flex flex-col  overflow-hidden overflow-y-auto ">
+      <div className="flex-1 flex flex-col   ">
       {/* <div className="flex flex-row justify-end items-center overflow-hidden h-[70px] bg-gray-100  p-6 border-b mb-1 mt-3 border-2 border-gray-100 rounded-xl w-[94%]">
         <div className="flex  ">
           <div className="bg-[#14919B] text-white rounded-full  w-10 h-10 flex items-center justify-center mr-4">
@@ -35,7 +35,7 @@ const DashboardLayout = () => {
         </div>
       </div> */}
 
-        <main className="flex-1 overflow-x-hidden  h-fit  p-6 bg-gray-100 border-1 rounded-xl mt-3 mb-1 w-[94%] ">
+        <main className="flex-1 bg-gray-100   p-6  border-1 rounded-xl mt-3 mb-1 w-[78%] ml-[300px] ">
           <Outlet /> {/* This will render the nested routes */}
         </main>
       </div>

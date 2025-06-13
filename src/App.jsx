@@ -27,7 +27,7 @@ export default function App() {
 
       {/* Protected Routes with Layout */}
       <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<DashboardLayout />}>
+        <Route path="/"  element={<DashboardLayout />}>
           <Route index element={<Home />} />
           <Route path="dashboard" element={<Home />} />
           <Route path= "challenges" element={<Challenges/>}/>

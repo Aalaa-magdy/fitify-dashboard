@@ -65,8 +65,8 @@ const handleSubmitChallenge = async (challengeData) => {
             correctAnswer: challengeData.questionId.correctAnswer
           }
         );
-        
-        // Create the updated challenge object manually
+         console.log(response,"dif")   
+         // Create the updated challenge object manually
         updatedChallenge = {
           ...editingChallenge,
           content: challengeData.content,
@@ -137,7 +137,7 @@ const handleSubmitChallenge = async (challengeData) => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen ">
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -213,7 +213,7 @@ const EmptyDetailView = ({ onAddChallenge }) => (
       </p>
       <button
         onClick={onAddChallenge}
-        className="mt-4 px-4 py-2 bg-[#ecf87e] text-gray-800 rounded-lg hover:bg-[#d4e86b] transition-colors"
+        className="mt-4 px-4 py-2 bg-[#14919B] text-white rounded-lg hover:bg-[#317277] transition-colors"
       >
         <Plus size={16} className="inline mr-1" />
         Add Challenge

@@ -17,7 +17,7 @@ const ChallengeListItem = ({ challenge, isSelected, onClick }) => {
         <div>
           <h3 className="font-medium text-gray-900">{challenge.content}</h3>
           <div className="flex items-center mt-1">
-            <span className="text-xs px-2 py-1 bg-[#ecf87e] rounded-full text-gray-800 mr-2">
+            <span className="text-xs px-2 py-1 bg-[#ecf87e]/30 rounded-full text-black mr-2">
               {challenge.type}
             </span>
             <span className="text-xs px-2 py-1 bg-[#e0f2fe] rounded-full text-gray-800">

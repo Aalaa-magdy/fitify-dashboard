@@ -100,7 +100,7 @@ const Workouts = () => {
   }
 
   return (
-    <div className="p-4 max-w-7xl mx-10">
+    <div className=" max-w-7xl ">
       {/* Toast Container */}
       <ToastContainer
         position="top-right"
@@ -115,10 +115,10 @@ const Workouts = () => {
       />
 
       <div className="flex  justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-[#266c6f]">Workout Programs</h1>
+        <h1 className="text-3xl text-black font-bold">Workout Programs</h1>
         <button
           onClick={() => setShowAddModal(true)}
-          className='p-2 w-[190px] bg-[#ecf87e] flex flex-row justify-center text-[18px] rounded-xl font-bold items-center border-2 border-[#edfc6b] '
+          className='p-2 w-[180px] bg-[#14919B] text-white flex flex-row justify-center  rounded-xl items-center border-2 border-[#14919B] '
         >
           <svg className="-ml-1 mr-2 h-5 w-5 font-semibold " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />

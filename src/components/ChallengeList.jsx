@@ -21,14 +21,14 @@ const ChallengesList = ({
   });
 
   return (
-    <div className={`w-full md:w-[45%] bg-white border-r border-gray-200 ${selectedChallenge ? 'hidden md:block' : ''}`}>
+    <div className={`w-full p-2 md:w-[45%] border-r border-gray-200 ${selectedChallenge ? 'hidden md:block' : ''}`}>
       {/* Header Section */}
-      <div className="p-4 border-b border-gray-200">
+      <div className=" border-b border-gray-200">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold text-[#14919B]">Challenges</h1>
+          <h1 className="text-3xl text-black font-bold">Challenges</h1>
           <button
             onClick={onAddChallenge}
-            className="flex items-center px-3 py-2 bg-[#ecf87e] text-gray-800 rounded-lg hover:bg-[#d4e86b] transition-colors"
+            className="flex items-center px-3 py-2 bg-[#14919B]  text-white rounded-lg hover:bg-[#d4e86b] transition-colors"
           >
             <Plus size={18} className="mr-1" />
             Add Challenge
@@ -91,7 +91,7 @@ const EmptyState = ({ searchTerm, onAddChallenge }) => (
     {!searchTerm && (
       <button
         onClick={onAddChallenge}
-        className="mt-4 px-4 font-bold py-2 bg-[#ecf87e] text-gray-800 rounded-lg hover:bg-[#d4e86b] transition-colors"
+        className="mt-4 px-4 font-bold py-2 bg-[#14919B] text-white rounded-lg hover:bg-[#54abb1] transition-colors"
       >
         <Plus size={16} className="inline mr-1" />
         Add Challenge

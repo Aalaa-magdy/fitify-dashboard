@@ -51,7 +51,7 @@ const ChallengeDetail = ({ challenge, onEdit, onDelete }) => {
               <HelpCircle className="h-8 w-10 mt-1 text-[#14919B]  mr-4" />
             )}
             <div>
-              <h1 className="text-2xl  font-bold">
+              <h1 className="text-2xl text-black  font-bold">
                 {challenge.content || 
                   (challenge.type === 'exercise' 
                     ? exerciseDetails?.name 
@@ -72,7 +72,7 @@ const ChallengeDetail = ({ challenge, onEdit, onDelete }) => {
           <div className="flex space-x-2">
             <button 
               onClick={onEdit}
-              className="p-2 bg-[#ecf87e] text-gray-800 rounded-full hover:bg-white hover:text-[#daec35] transition-all duration-300 border-2 border-[#daec35] shadow-md"
+              className="p-2 bg-[#14919B]  text-white  rounded-full hover:bg-white hover:text-[#14919B] transition-all duration-300 border-2 border-[#14919B] shadow-md"
               title="Edit challenge"
             >
               <Edit2 size={20} />
@@ -92,7 +92,7 @@ const ChallengeDetail = ({ challenge, onEdit, onDelete }) => {
       <div className="p-6">
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-[#14919B]/10 p-4 rounded-lg border border-[#14919B]/20 flex items-center">
+          <div className=" p-4 rounded-lg border border-[#14919B]/30 flex items-center">
             <Award className="h-6 w-6 text-[#14919B] mr-3" />
             <div>
               <h3 className="text-sm font-medium text-gray-700">Points</h3>
@@ -100,7 +100,7 @@ const ChallengeDetail = ({ challenge, onEdit, onDelete }) => {
             </div>
           </div>
           
-          <div className="bg-[#14919B]/10 p-4 rounded-lg border border-[#14919B]/20 flex items-center">
+          <div className=" p-4 rounded-lg border border-[#14919B]/30 flex items-center">
             <Clock className="h-6 w-6 text-[#14919B] mr-3" />
             <div>
               <h3 className="text-sm font-medium text-gray-700">Status</h3>
@@ -108,7 +108,7 @@ const ChallengeDetail = ({ challenge, onEdit, onDelete }) => {
             </div>
           </div>
           
-          <div className="bg-[#14919B]/10 p-4 rounded-lg border border-[#14919B]/20 flex items-center">
+          <div className=" p-4 rounded-lg border border-[#14919B]/30 flex items-center">
             <span className="h-6 w-6 text-[#14919B] mr-3 flex items-center justify-center">
               {challenge.type === 'exercise' ? (
                 <Dumbbell className="h-5 w-5" />
