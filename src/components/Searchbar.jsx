@@ -1,5 +1,5 @@
 const SearchBar = ({ searchTerm, setSearchTerm }) => (
-  <div className="relative flex-1 sm:w-64">
+  <div className="relative flex-1 sm:w-full">
     <input
       type="text"
       placeholder="Search users..."

@@ -35,7 +35,7 @@ const DashboardLayout = () => {
         </div>
       </div> */}
 
-        <main className="flex-1 bg-gray-100   p-6  border-1 rounded-xl mt-3 mb-1 w-[78%] ml-[300px] ">
+        <main className="flex-1 bg-gray-100   p-6  border-1 rounded-xl mt-3 mb-1 w-[75%]  ml-[300px] ">
           <Outlet /> {/* This will render the nested routes */}
         </main>
       </div>

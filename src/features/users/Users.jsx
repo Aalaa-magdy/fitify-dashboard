@@ -36,14 +36,14 @@ const Users = () => {
   );
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#f9fafb]">
+    <div className="flex h-screen overflow-hidden ">
       <ToastContainer position="top-right" autoClose={3000} />
 
       {/* Sidebar */}
-      <div className={`w-full pb-10 md:w-[40%] border-r border-gray-200 bg-white transition-all ${selectedUser ? 'hidden md:block' : ''}`}>
-        <div className="p-4 border-b shadow-sm bg-white sticky top-0 z-10">
+      <div className={`w-full p-2 md:w-[45%] border-r border-gray-200 ${selectedUser ? 'hidden md:block' : ''}`}>
+        <div className="border-b border-gray-200">
           <div className="flex justify-between items-center mb-4">
-            <h1 className="text-2xl font-bold text-[#14919B]">Users</h1>
+            <h1 className="text-3xl font-bold text-black">Users</h1>
           </div>
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </div>
@@ -59,13 +59,11 @@ const Users = () => {
                 <div
                   key={user._id}
                   onClick={() => setSelectedUser(user)}
-                  className={`group flex items-center justify-between gap-3 p-4 mb-2 rounded-lg border cursor-pointer transition-all ${
-                    selectedUser?._id === user._id
-                      ? 'bg-[#f0fdf4] border-[#14919B]'
-                      : 'bg-white border-gray-200 hover:bg-gray-50'
-                  }`}
+                  className={`p-3 border-b border-gray-200 cursor-pointer transition-colors hover:bg-[#f0fdf4] flex justify-between items-center ${
+        (selectedUser?._id === user?._id) ? 'bg-[#f0fdf4] border-l-4 border-l-[#14919B]' : ''
+      }`}
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3">
                     <UserAvatar user={user} />
                     <div className="min-w-0">
                       <h3 className="font-semibold text-gray-900 truncate">{user.name}</h3>

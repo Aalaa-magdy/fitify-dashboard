@@ -1,9 +1,18 @@
+import { User } from 'lucide-react';
+
 const UserAvatar = ({ user, size = "md", className = "" }) => {
   const sizeClasses = {
-    xs: "w-6 h-6 text-xs",
-    sm: "w-8 h-8 text-sm",
-    md: "w-10 h-10 text-base",
-    lg: "w-12 h-12 text-lg"
+    xs: "w-6 h-6",
+    sm: "w-8 h-8",
+    md: "w-10 h-10",
+    lg: "w-12 h-12"
+  };
+
+  const iconSize = {
+    xs: 14,
+    sm: 18,
+    md: 22,
+    lg: 26
   };
 
   return user?.profilePic ? (
@@ -14,10 +23,14 @@ const UserAvatar = ({ user, size = "md", className = "" }) => {
     />
   ) : (
     <div 
-      className={`rounded-full bg-[#14919B] flex items-center justify-center text-white font-semibold shadow-sm ${sizeClasses[size]} ${className}`}
-      style={{ backgroundColor: '#14919B', color: '#ECF87E' }}
+      className={`rounded-full flex items-center justify-center bg-gray-200 shadow-sm ${sizeClasses[size]} ${className}`}
+     
     >
-      {user?.name?.charAt(0).toUpperCase()}
+      <User 
+        size={iconSize[size]} 
+        className="text-mainBlue" 
+        strokeWidth={2.5}
+      />
     </div>
   );
 };
