@@ -63,7 +63,7 @@ const CommunityStats = () => {
       const response = await axios.get('/stats/community');
       setStats(response.data);
       setLastUpdated(new Date());
-      setRetryCount(0); // Reset retry count on success
+      setRetryCount(0);
     } catch (err) {
       console.error('Error fetching community stats:', err);
       
@@ -89,7 +89,6 @@ const CommunityStats = () => {
 
   useEffect(() => {
     fetchStats();
-    
     const intervalId = setInterval(fetchStats, 5 * 60 * 1000);
     return () => clearInterval(intervalId);
   }, []);
@@ -101,13 +100,7 @@ const CommunityStats = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      <div 
-        className="border rounded-xl p-6 text-center"
-        style={{ 
-          background: colors.gradientBlue,
-          borderColor: colors.errorRed 
-        }}
-      >
+      <div className="border rounded-xl p-6 text-center" style={{ background: colors.gradientBlue, borderColor: colors.errorRed }}>
         <div className="flex flex-col items-center">
           <div className="p-3 mb-4 rounded-full bg-white/20">
             <FiAlertCircle className="text-white text-2xl" />
@@ -119,25 +112,12 @@ const CommunityStats = () => {
             <motion.button
               onClick={fetchStats}
               className="mt-3 px-5 py-2.5 rounded-lg font-semibold mx-auto flex items-center gap-2"
-              style={{
-                background: colors.gradientYellow,
-                color: colors.mainGreen
-              }}
+              style={{ background: colors.gradientYellow, color: colors.mainGreen }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               disabled={loading}
             >
-              {loading ? (
-                <>
-                  <FiRefreshCw className="animate-spin" />
-                  Retrying...
-                </>
-              ) : (
-                <>
-                  <FiRefreshCw />
-                  Try Again
-                </>
-              )}
+              {loading ? <><FiRefreshCw className="animate-spin" /> Retrying...</> : <><FiRefreshCw /> Try Again</>}
             </motion.button>
           ) : (
             <div className="text-white/80 text-sm mt-3">
@@ -150,50 +130,32 @@ const CommunityStats = () => {
     </motion.div>
   );
 
-  const renderPartialError = (message) => (
-    <div className="p-4 rounded-lg bg-red-50 border border-red-100 flex items-start gap-3">
-      <FiAlertCircle className="text-red-500 mt-0.5 flex-shrink-0" />
-      <div>
-        <p className="text-sm font-medium text-red-800">{message}</p>
-        <p className="text-xs text-red-600 mt-1">
-          Some statistics may be incomplete or unavailable
-        </p>
-      </div>
-    </div>
-  );
-
   const renderUserInfo = (user) => (
-    <motion.div 
-      className="flex items-center gap-3"
-      whileHover={{ scale: 1.02 }}
-    >
+    <motion.div className="flex items-center gap-3" whileHover={{ scale: 1.02 }}>
       <UserAvatar user={user} size="lg" />
       <div>
         <span className="font-bold text-gray-900">{user.name}</span>
-        {user._id && (
-          <span className="block text-xs text-gray-500">ID: {user._id.substring(0, 6)}...</span>
-        )}
       </div>
     </motion.div>
   );
 
   const renderPostInfo = (post) => (
     <motion.article 
-      className="p-5 border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 bg-white"
+      className="p-4 border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 bg-white h-full flex flex-col"
       whileHover={{ scale: 1.01 }}
       variants={cardVariants}
     >
-      {post.user && renderUserInfo(post.user)}
-      <p className="mt-3 text-gray-800 line-clamp-3">{post.content}</p>
+      {post?.user && renderUserInfo(post.user)}
+      <p className="mt-3 text-gray-800 line-clamp-3 flex-grow">{post?.content}</p>
       
-      {post.imageUrls?.length > 0 && (
+      {post?.imageUrls?.length > 0 && (
         <div className="mt-3 grid grid-cols-2 gap-2">
           {post.imageUrls.slice(0, 2).map((img, index) => (
             <motion.img 
               key={index}
               src={img} 
               alt={`Post content ${index}`}
-              className="rounded-lg object-cover h-28 w-full"
+              className="rounded-lg object-cover h-24 w-full"
               whileHover={{ scale: 1.03 }}
             />
           ))}
@@ -202,16 +164,16 @@ const CommunityStats = () => {
       
       <div className="flex items-center gap-4 text-sm text-gray-500 mt-4">
         <span className="flex items-center gap-1">
-          <FiHeart className="text-red-500" /> {post.likes?.length || 0}
+          <FiHeart className="text-red-500" /> {post?.likes?.length || 0}
         </span>
         <span className="flex items-center gap-1">
-          <FiRepeat className="text-blue-500" /> {post.shares || 0}
+          <FiRepeat className="text-blue-500" /> {post?.shares || 0}
         </span>
         <span className="flex items-center gap-1">
-          <FiMessageSquare className="text-green-500" /> {post.comments?.length || 0} comments
+          <FiMessageSquare className="text-green-500" /> {post?.comments?.length || 0} comments
         </span>
       </div>
-      {post.createdAt && (
+      {post?.createdAt && (
         <div className="flex items-center gap-1 text-xs text-gray-400 mt-2">
           <FiClock size={12} />
           <time dateTime={post.createdAt}>
@@ -227,11 +189,8 @@ const CommunityStats = () => {
     
     return (
       <motion.div 
-        className={`p-5 rounded-xl ${bgColor} flex items-center gap-4 transition-all cursor-default ${hasError ? 'opacity-70' : ''}`}
-        style={{ 
-          background: bgColor.includes('gradient') ? bgColor : undefined,
-          backgroundColor: !bgColor.includes('gradient') ? bgColor : undefined
-        }}
+        className={`p-5 rounded-xl flex items-center gap-4 transition-all cursor-default ${hasError ? 'opacity-70' : ''}`}
+        style={{ background: bgColor.includes('gradient') ? bgColor : bgColor }}
         variants={statCardVariants}
         whileHover={hasError ? {} : "hover"}
         initial="hidden"
@@ -259,46 +218,40 @@ const CommunityStats = () => {
     );
   };
 
-  // If we have a critical error that prevents displaying any data
   if (error && (!stats || Object.keys(stats).length === 0)) {
     return renderErrorState();
   }
 
   return (
     <motion.div 
-      className="max-w-6xl mx-auto p-4 md:p-6 space-y-8"
+      className="max-w-7xl mx-auto p-4 md:p-6 space-y-8"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      {/* Show partial error banner if we have some data but also errors */}
       {error && stats && Object.keys(stats).length > 0 && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          {renderPartialError(error)}
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
+          <div className="p-4 rounded-lg bg-red-50 border border-red-100 flex items-start gap-3">
+            <FiAlertCircle className="text-red-500 mt-0.5 flex-shrink-0" />
+            <div>
+              <p className="text-sm font-medium text-red-800">{error}</p>
+              <p className="text-xs text-red-600 mt-1">Some statistics may be incomplete or unavailable</p>
+            </div>
+          </div>
         </motion.div>
       )}
 
       <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex items-center gap-3">
-          <div 
-            className="p-3 rounded-xl"
-            style={{ background: colors.gradientBlue }}
-          >
+          <div className="p-3 rounded-xl" style={{ background: colors.gradientBlue }}>
             <FiActivity className="text-white text-xl" />
           </div>
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold" style={{ color: colors.blueDark }}>
-              Community Dashboard
-            </h2>
+            <h2 className="text-2xl font-bold" style={{ color: colors.blueDark }}>Community Dashboard</h2>
             <p className="text-sm text-gray-500">Real-time insights about your community</p>
           </div>
         </div>
         {lastUpdated && (
-          <div 
-            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-gray-200 shadow-xs"
-          >
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-gray-200 shadow-xs">
             <FiClock size={16} style={{ color: colors.mainGreen }} />
             <span className="text-sm" style={{ color: colors.mainGreen }}>
               Updated: {lastUpdated.toLocaleTimeString()}
@@ -311,177 +264,125 @@ const CommunityStats = () => {
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
         initial="hidden"
         animate="visible"
-        variants={{
-          visible: {
-            transition: { staggerChildren: 0.1 }
-          }
-        }}
+        variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
       >
-        {renderStatCard(
-          'Total Posts',
-          stats?.totalPosts,
-          <FiBarChart2 size={24} style={{ color: colors.blueDark }} />,
-          colors.blueLight,
-          colors.blueDark,
-          0
-        )}
-        {renderStatCard(
-          'Active Users',
-          stats?.totalUsers,
-          <FiUsers size={24} style={{ color: colors.mainGreen }} />,
-          colors.greenLight,
-          colors.mainGreen,
-          1
-        )}
-        {renderStatCard(
-          'Total Likes',
-          stats?.totalLikes,
-          <FiHeart size={24} style={{ color: '#EF4444' }} />,
-          '#FEE2E2',
-          '#EF4444',
-          2
-        )}
-        {renderStatCard(
-          'Engagement',
-          stats?.totalEngagement,
-          <FiTrendingUp size={24} style={{ color: colors.mainBlue }} />,
-          colors.gradientBlue,
-          'white',
-          3
-        )}
+        {renderStatCard('Total Posts', stats?.totalPosts, <FiBarChart2 size={24} style={{ color: colors.blueDark }} />, colors.blueLight, colors.blueDark, 0)}
+        {renderStatCard('Active Users', stats?.totalUsers, <FiUsers size={24} style={{ color: colors.mainGreen }} />, colors.greenLight, colors.mainGreen, 1)}
+        {renderStatCard('Total Likes', stats?.totalLikes, <FiHeart size={24} style={{ color: '#EF4444' }} />, '#FEE2E2', '#EF4444', 2)}
+        {renderStatCard('Engagement', stats?.totalEngagement, <FiTrendingUp size={24} style={{ color: colors.mainBlue }} />, colors.gradientBlue, 'white', 3)}
       </motion.div>
 
-      <motion.section 
-        className="space-y-8"
-        variants={cardVariants}
-      >
-        <div>
-          <div className="flex items-center gap-3 mb-4">
-            <div 
-              className="p-2 rounded-lg"
-              style={{ background: colors.gradientYellow }}
-            >
-              <FiAward className="text-white" />
-            </div>
-            <h3 className="text-xl font-bold" style={{ color: colors.blueDark }}>
-              Top Performers
-            </h3>
+      <motion.section className="space-y-6" variants={cardVariants}>
+        <div className="flex items-center gap-3">
+          <div className="p-2 rounded-lg" style={{ background: colors.gradientYellow }}>
+            <FiAward className="text-white" />
           </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            <motion.div 
-              className="rounded-xl p-5 shadow-sm border bg-white"
-              style={{ borderColor: colors.mainYellow }}
-              variants={cardVariants}
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <div className="p-1.5 rounded-full bg-red-100">
-                  <FiHeart className="text-red-500" />
-                </div>
-                <h4 className="font-bold" style={{ color: colors.blueDark }}>
-                  Most Liked Post
-                </h4>
-              </div>
-              {loading ? (
-                <div className="flex justify-center py-8">
-                  <LoadingSpinner />
-                </div>
-              ) : stats?.mostLikedPost ? (
-                renderPostInfo(stats.mostLikedPost)
-              ) : (
-                <div className="py-6 text-center rounded-lg bg-gray-50">
-                  <p className="text-gray-500">No post data available</p>
-                </div>
-              )}
-            </motion.div>
-            
-            <motion.div 
-              className="rounded-xl p-5 shadow-sm border bg-white"
-              style={{ borderColor: colors.mainYellow }}
-              variants={cardVariants}
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <div className="p-1.5 rounded-full bg-blue-100">
-                  <FiRepeat className="text-blue-500" />
-                </div>
-                <h4 className="font-bold" style={{ color: colors.blueDark }}>
-                  Most Shared Post
-                </h4>
-              </div>
-              {loading ? (
-                <div className="flex justify-center py-8">
-                  <LoadingSpinner />
-                </div>
-              ) : stats?.mostSharedPost ? (
-                renderPostInfo(stats.mostSharedPost)
-              ) : (
-                <div className="py-6 text-center rounded-lg bg-gray-50">
-                  <p className="text-gray-500">No post data available</p>
-                </div>
-              )}
-            </motion.div>
-          </div>
+          <h3 className="text-xl font-bold" style={{ color: colors.blueDark }}>Top Performers</h3>
         </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          {/* Most Liked Post */}
+          <motion.div 
+            className="rounded-xl p-5 shadow-sm border bg-white h-full flex flex-col"
+            style={{ borderColor: colors.mainYellow }}
+            variants={cardVariants}
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <div className="p-1.5 rounded-full bg-red-100">
+                <FiHeart className="text-red-500" />
+              </div>
+              <h4 className="font-bold" style={{ color: colors.blueDark }}>Most Liked Post</h4>
+            </div>
+            {loading ? (
+              <div className="flex justify-center py-8 flex-grow">
+                <LoadingSpinner />
+              </div>
+            ) : stats?.mostLikedPost ? (
+              renderPostInfo(stats.mostLikedPost)
+            ) : (
+              <div className="py-6 text-center rounded-lg bg-gray-50 flex-grow flex items-center justify-center">
+                <p className="text-gray-500">No post data available</p>
+              </div>
+            )}
+          </motion.div>
 
-        <motion.div 
-          className="rounded-xl p-6 shadow-sm bg-white border"
-          style={{ borderColor: colors.mainBlue }}
-          variants={cardVariants}
-        >
-          <div className="flex items-center gap-3 mb-5">
-            <div 
-              className="p-2 rounded-lg"
-              style={{ background: colors.gradientBlue }}
-            >
-              <FiUser className="text-white" />
+          {/* Most Shared Post */}
+          <motion.div 
+            className="rounded-xl p-5 shadow-sm border bg-white h-full flex flex-col"
+            style={{ borderColor: colors.mainYellow }}
+            variants={cardVariants}
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <div className="p-1.5 rounded-full bg-blue-100">
+                <FiRepeat className="text-blue-500" />
+              </div>
+              <h4 className="font-bold" style={{ color: colors.blueDark }}>Most Shared Post</h4>
             </div>
-            <h3 className="text-xl font-bold" style={{ color: colors.blueDark }}>
-              Community Star
-            </h3>
-          </div>
-          
-          {loading ? (
-            <div className="flex justify-center py-8">
-              <LoadingSpinner />
+            {loading ? (
+              <div className="flex justify-center py-8 flex-grow">
+                <LoadingSpinner />
+              </div>
+            ) : stats?.mostSharedPost ? (
+              renderPostInfo(stats.mostSharedPost)
+            ) : (
+              <div className="py-6 text-center rounded-lg bg-gray-50 flex-grow flex items-center justify-center">
+                <p className="text-gray-500">No post data available</p>
+              </div>
+            )}
+          </motion.div>
+
+          {/* Community Star */}
+          <motion.div 
+            className="rounded-xl p-5 shadow-sm border bg-white h-full flex flex-col"
+            style={{ borderColor: colors.mainBlue }}
+            variants={cardVariants}
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <div className="p-1.5 rounded-full bg-green-100">
+                <FiUser className="text-green-500" />
+              </div>
+              <h4 className="font-bold" style={{ color: colors.blueDark }}>Community Star</h4>
             </div>
-          ) : stats?.mostActiveUser ? (
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-5 rounded-lg bg-gray-50">
-              <div className="flex-1">
+            {loading ? (
+              <div className="flex justify-center py-8 flex-grow">
+                <LoadingSpinner />
+              </div>
+            ) : stats?.mostActiveUser ? (
+              <div className="flex flex-col gap-4 flex-grow">
                 {renderUserInfo(stats.mostActiveUser)}
                 {stats.mostActiveUser.bio && (
-                  <p className="mt-3 text-gray-600 text-sm">
+                  <p className="text-gray-600 text-sm line-clamp-3">
                     {stats.mostActiveUser.bio}
                   </p>
                 )}
+                <div className="grid grid-cols-3 gap-2 mt-auto">
+                  <div className="text-center p-2 rounded-lg bg-gray-50">
+                    <p className="text-xs font-medium" style={{ color: colors.mainBlue }}>Posts</p>
+                    <p className="text-lg font-bold mt-1" style={{ color: colors.blueDark }}>
+                      {stats.mostActiveUser.postCount || 0}
+                    </p>
+                  </div>
+                  <div className="text-center p-2 rounded-lg bg-gray-50">
+                    <p className="text-xs font-medium" style={{ color: colors.mainBlue }}>Likes</p>
+                    <p className="text-lg font-bold mt-1" style={{ color: colors.blueDark }}>
+                      {stats.mostActiveUser.likesReceived || 0}
+                    </p>
+                  </div>
+                  <div className="text-center p-2 rounded-lg bg-gray-50">
+                    <p className="text-xs font-medium" style={{ color: colors.mainBlue }}>Shares</p>
+                    <p className="text-lg font-bold mt-1" style={{ color: colors.blueDark }}>
+                      {stats.mostActiveUser.sharesReceived || 0}
+                    </p>
+                  </div>
+                </div>
               </div>
-              
-              <div className="grid grid-cols-3 gap-4 w-full md:w-auto">
-                <div className="text-center p-3 rounded-lg bg-white shadow-xs">
-                  <p className="text-sm font-medium" style={{ color: colors.mainBlue }}>Posts</p>
-                  <p className="text-2xl font-bold mt-1" style={{ color: colors.blueDark }}>
-                    {stats.mostActiveUser.postCount || 0}
-                  </p>
-                </div>
-                <div className="text-center p-3 rounded-lg bg-white shadow-xs">
-                  <p className="text-sm font-medium" style={{ color: colors.mainBlue }}>Likes</p>
-                  <p className="text-2xl font-bold mt-1" style={{ color: colors.blueDark }}>
-                    {stats.mostActiveUser.likesReceived || 0}
-                  </p>
-                </div>
-                <div className="text-center p-3 rounded-lg bg-white shadow-xs">
-                  <p className="text-sm font-medium" style={{ color: colors.mainBlue }}>Shares</p>
-                  <p className="text-2xl font-bold mt-1" style={{ color: colors.blueDark }}>
-                    {stats.mostActiveUser.sharesReceived || 0}
-                  </p>
-                </div>
+            ) : (
+              <div className="py-6 text-center rounded-lg bg-gray-50 flex-grow flex items-center justify-center">
+                <p className="text-gray-500">No user data available</p>
               </div>
-            </div>
-          ) : (
-            <div className="py-6 text-center rounded-lg bg-gray-50">
-              <p className="text-gray-500">No user data available</p>
-            </div>
-          )}
-        </motion.div>
+            )}
+          </motion.div>
+        </div>
       </motion.section>
     </motion.div>
   );

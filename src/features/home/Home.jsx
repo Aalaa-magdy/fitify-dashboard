@@ -6,6 +6,7 @@ import UserAgeRunwayChart from "../../components/UserAgeRunwayChart";
 import AllUsersProgressChart from "../../components/AllUsersProgressChart";
 import { Users, Dumbbell, CheckCircle, Award, TrendingUp, ChevronRight, Mail, Bell } from "lucide-react";
 import CommunityStats from "../../components/CommunityStats";
+
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({ users: 0, admins: 0, exercises: 0, completedSessions: 0, males: 0, females: 0 });
@@ -99,7 +100,7 @@ const Home = () => {
     </div>
 
   {/* Stats Charts Section */}
-  <div className="grid gap-6 md:grid-cols-2">
+  <div className="grid gap-6 md:grid-cols-2 my-8">
   
     <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
       <h2 className="text-xl font-bold text-[#0F172A] mb-4">Age Distribution</h2>
@@ -116,10 +117,10 @@ const Home = () => {
       <Leaderboard items={topUsers} type="top" />
     </div>
 
-    <CommunityStats/>
-  
   </div>
+  
 </div>
+ <CommunityStats/>
       </main>
     </div>
   );
