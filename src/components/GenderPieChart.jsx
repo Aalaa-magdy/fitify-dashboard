@@ -66,21 +66,21 @@ const GenderPieChart = ({ genderData }) => {
   };
 
   return (
-    <div className="w-full h-full p-2">
+    <div className="w-full p-2">
       <div className="h-full flex flex-col">
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center space-x-2">
             <span className="text-xs px-2 py-1 rounded-md font-medium" 
-                  style={{ backgroundColor: '#EFF6FF', color: colors.male }}>
+                  style={{ backgroundColor: '#f4fc82' }}>
               {genderData.males} Male
             </span>
             <span className="text-xs px-2 py-1 rounded-md font-medium" 
-                  style={{ backgroundColor: '#FEF9C3', color: '#0F172A' }}>
+                  style={{ backgroundColor: '#3dcadd9d', color: '#0F172A' }}>
               {genderData.females} Female
             </span>
           </div>
         </div>
-        <div className="flex-grow">
+        <div className="flex-grow h-52">
           <Pie data={data} options={options} />
         </div>
       </div>

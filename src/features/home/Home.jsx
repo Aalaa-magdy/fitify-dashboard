@@ -11,6 +11,8 @@ import AllUsersProgressChart from "../../components/AllUsersProgressChart";
 import GenderPieChart from "../../components/GenderPieChart";
 import UserAvatar from '../../components/UserAvatar';
 import UserGrowthChart from "../../components/UserGrowthAreaChart";
+import UserGrowthAreaChart from "../../components/UserGrowthAreaChart";
+import SocialEngagementCards from "./components/SocialEngagementCard";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -88,7 +90,6 @@ const Home = () => {
       
       setCommunityData(prev => ({
         ...prev,
-        error: errorMessage,
         retryCount: prev.retryCount + 1,
         loading: false
       }));
@@ -116,24 +117,24 @@ const Home = () => {
         <p className="text-[#497174] mt-2">Track platform performance and engagement</p>
       </header>
 
-      <main className="  space-y-8 flex flex-col">
+      <main className="  space-y-8 flex flex-col ">
         {/* Fitness Statistics */}
         
         <FitnessStats stats={fitnessData.stats} loading={loading} />
         
-        <div className='flex flex-row gap-3 w-full '>
-        <div className="lg:w-[55%]">
-          <TopUsersChart users={fitnessData.topUsers} />
+        <div className='flex flex-row gap-3 w-full h-[350px] '>
+          <div className="lg:w-[40%] ">
+              <TopUsersChart users={fitnessData.topUsers} />
           </div>
 
-          
-        <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 lg:w-2/5">
-          <h2 className="text-xl font-bold text-[#0F172A] mb-4">Gender Distribution</h2>
-          <div className="h-[250px]">
-            <GenderPieChart genderData={{ males: fitnessData.stats?.males, females: fitnessData.stats?.females }} />
+           
+          <div className="bg-white h-[342px] p-4 rounded-xl shadow-lg border border-gray-100 ">
+              <h2 className="text-xl  font-bold text-[#0F172A] mb-4">Gender Distribution</h2>
+              <GenderPieChart genderData={{ males: fitnessData.stats?.males, females: fitnessData.stats?.females }} />
           </div>
-        </div>
-
+        <div className='w-[30%]'>
+               <SocialEngagementCards  />
+          </div>
         </div>
         
         {/* Charts Section */}
@@ -150,7 +151,7 @@ const Home = () => {
           
         </div>
       
-        <UserGrowthChart />
+      
 
       </main>
     </div>

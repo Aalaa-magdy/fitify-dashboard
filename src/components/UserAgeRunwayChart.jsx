@@ -11,10 +11,10 @@ import { FiRefreshCw, FiAlertCircle } from 'react-icons/fi';
 const COLORS = {
   mainBlue: '#1297a3',
   mainYellow: '#D8E84E',
-  mainGreen: '#18d3a1',
+  mainGreen: '#0aa093',
   secondYellow: '#E0F06D',
   blueLight: '#D8F3F5',
-  yellowLight: '#F5F9D5',
+  yellowLight: '#f7f596',
   greenLight: '#E8ECD8',
   blueDark: '#0A535A',
   errorRed: '#DC2626',
@@ -128,7 +128,7 @@ const UserAgeRunwayChart = () => {
             className="text-xs px-3 py-1 rounded-full font-medium"
             style={{ 
               background: COLORS.yellowLight,
-              color: COLORS.mainGreen
+              
             }}
           >
             Total Users: {totalUsers.toLocaleString()}

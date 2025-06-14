@@ -100,7 +100,7 @@ const TopUsersChart = ({ users }) => {
         </div>
       </div>
       
-      <div className="h-64 w-full">
+      <div className="h-60 w-full">
         <Bar 
           data={data} 
           options={options}
