@@ -2,18 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "../../api/axiosInstance";
 import LoadingSpinner from '../../components/LoadingSpinner';
 import FitnessStats from "./components/FitnessStats";
-import CommunityStats from "./components/CommunityStats";
 import AllCharts from "./components/AllCharts";
-import TopPerformers from "./components/TopPerformers";
 import TopUsersChart from "./components/TopUserChart";
-import Leaderboard from "../../components/Leaderboard";
-import AllUsersProgressChart from "../../components/AllUsersProgressChart";
 import GenderPieChart from "../../components/GenderPieChart";
-import UserAvatar from '../../components/UserAvatar';
-import UserGrowthChart from "../../components/UserGrowthAreaChart";
-import UserGrowthAreaChart from "../../components/UserGrowthAreaChart";
 import SocialEngagementCards from "./components/SocialEngagementCard";
-import ExerciseTimeChart from "../../components/ExerciseTimeChart";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);

@@ -1,11 +1,11 @@
-import { Dumbbell, HelpCircle } from 'lucide-react';
+import { Dumbbell, HelpCircle, ChevronRight } from 'lucide-react';
 
 const ChallengeListItem = ({ challenge, isSelected, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className={`p-4 border-b border-gray-200 cursor-pointer transition-colors hover:bg-[#f0fdf4] flex justify-between items-center ${
-        isSelected ? 'bg-[#f0fdf4] border-l-4 border-l-[#14919B]' : ''
+      className={`group p-4 border-b border-gray-200 cursor-pointer  transition-colors flex justify-between items-center ${
+        isSelected ? 'bg-[#f0fdf4] border-l-4 border-l-[#14919B]' : 'hover:bg-[#f0fdf4]'
       }`}
     >
       <div className="flex items-center">
@@ -26,7 +26,9 @@ const ChallengeListItem = ({ challenge, isSelected, onClick }) => {
           </div>
         </div>
       </div>
-    
+      
+      {/* Added arrow icon with hover effect */}
+      <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-[#14919B] transition-colors" />
     </div>
   );
 };
