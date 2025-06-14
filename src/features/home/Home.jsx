@@ -11,8 +11,12 @@ import AllUsersProgressChart from "../../components/AllUsersProgressChart";
 import GenderPieChart from "../../components/GenderPieChart";
 import UserAvatar from '../../components/UserAvatar';
 import UserGrowthChart from "../../components/UserGrowthAreaChart";
+<<<<<<< HEAD
 import UserGrowthAreaChart from "../../components/UserGrowthAreaChart";
 import SocialEngagementCards from "./components/SocialEngagementCard";
+=======
+import ExerciseTimeChart from "../../components/ExerciseTimeChart";
+>>>>>>> 723681d3f932899bd70852968fb0129d0cf0ffe7
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -143,15 +147,21 @@ const Home = () => {
           lastLeaderboard={fitnessData.lastLeaderboard} 
         />
         
-        {/* Leaderboards and Top Performers */}
-        <div className="flex flex-col lg:flex-row gap-6">
+       
+        <div className="flex flex-col md:flex-row gap-2">
         
-          
-          
+        
+        <UserGrowthChart />
+        <ExerciseTimeChart />
           
         </div>
+<<<<<<< HEAD
       
       
+=======
+       
+    
+>>>>>>> 723681d3f932899bd70852968fb0129d0cf0ffe7
 
       </main>
     </div>

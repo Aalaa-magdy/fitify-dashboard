@@ -139,7 +139,7 @@ const TopLeaderboardTable = ({ items, colors }) => (
 
 const LastLeaderboardList = ({ items, colors }) => (
   <div className="space-y-2">
-    {items.map((item, index) => (
+    {items?.map((item, index) => (
       <div key={item._id || index} className="flex items-center p-1 hover:bg-[#F8FAFC] rounded transition-colors">
         <span className={`w-4 h-4 flex items-center justify-center rounded-full text-[10px] font-bold mr-2
           ${index === 0 ? 'bg-[#ECF87E]/20 text-[#0F172A] border border-[#ECF87E]' : 
