@@ -110,7 +110,7 @@ const UserAgeRunwayChart = () => {
   }
 
   return (
-    <div className="w-full  mx-auto bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+    <div className="w-full  mx-auto bg-white p-5 rounded-xl shadow-sm  hover:shadow-md transition-shadow">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-5">
         <div className="flex items-center space-x-3">
           <div 
@@ -121,7 +121,7 @@ const UserAgeRunwayChart = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </div>
-          <h2 className="text-lg font-semibold text-gray-800">User Age Distribution</h2>
+          <h2 className="text-lg font-bold text-gray-800">User Age Distribution</h2>
         </div>
         <div className="flex items-center space-x-2 mt-2 sm:mt-0">
           <span 
@@ -222,7 +222,7 @@ const CustomTooltip = ({ active, payload, label, totalUsers }) => {
     const percentage = Math.round((data.count / totalUsers) * 100);
     return (
       <div 
-        className="bg-white p-3 shadow-lg rounded-lg border border-gray-200"
+        className="bg-white p-3 shadow-lg rounded-lg "
         style={{ minWidth: '160px' }}
       >
         <p className="font-medium text-gray-800 mb-1">{data.range}</p>

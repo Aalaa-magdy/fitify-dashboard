@@ -40,8 +40,8 @@ const UserGrowthAreaChart = () => {
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md w-full max-w-3xl">
-      <h2 className="text-lg font-semibold mb-4 text-gray-700">
-        User Growth Over Time
+      <h2 className="text-lg font-bold mb-4 ">
+        Users Growth Over Time
       </h2>
 
       {loading ? (

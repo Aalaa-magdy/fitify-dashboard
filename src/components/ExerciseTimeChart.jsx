@@ -112,7 +112,7 @@ const ExerciseTimeChart = () => {
     <div className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-4xl mx-auto border border-gray-100">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
         <div>
-          <h2 className="text-xl font-semibold text-gray-800">
+          <h2 className="text-xl font-bold">
             Exercise Activity Distribution by Time of Day
           </h2>
           {totalExercises > 0 && (
