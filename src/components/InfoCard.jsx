@@ -1,90 +1,129 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 
-const colors = {
-  mainBlue: '#0E7C86',
-  mainYellow: '#D8E84E',
-  mainGreen: '#6B732A',
-  secondYellow: '#E0F06D',
-  blueLight: '#f0fdf4',
-  yellowLight: '#F5F9D5',
-  greenLight: '#E8ECD8',    
-  blueDark: '#0A535A'
-};
-
 const InfoCard = ({ title, icon, items, color }) => {
-  const colorConfig = {
-    blue: {
-      bg: colors.blueLight,
-      text: colors.blueDark,
-      iconBg: colors.mainBlue,
-      iconColor: colors.secondYellow,
-      accent: colors.blueDark
-    },
-    green: {
-      bg: colors.greenLight,
-      text: colors.mainGreen,
-      iconBg: colors.mainGreen,
-      iconColor: colors.secondYellow,
-      accent: colors.mainGreen
+  // Updated color palette
+  const colors = {
+    primary: '#14919B',
+    primaryLight: '#19a4a8',
+    accent: '#cddc44',
+    dark: '#0F172A',
+    lightBg: '#F8FAFC'
+  };
+
+  // Animation variants
+  const container = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        staggerChildren: 0.1
+      }
     }
   };
 
-  const currentColor = colorConfig[color] || colorConfig.blue;
+  const item = {
+    hidden: { opacity: 0, x: -10 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.3
+      }
+    },
+    hover: {
+      x: 3,
+      transition: { type: 'spring', stiffness: 300 }
+    }
+  };
+
+  const iconHover = {
+    hover: {
+      rotate: [0, -5, 5, 0],
+      transition: { duration: 0.6 }
+    }
+  };
 
   return (
-    <div 
-      className="rounded-xl border p-4 transition-all hover:shadow-md h-72"
-      style={{ 
-        backgroundColor: currentColor.bg,
-        borderColor: `${currentColor.iconBg}30`,
-        boxShadow: '0 2px 6px rgba(0,0,0,0.05)'
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={container}
+      className="rounded-xl border p-5 h-full flex flex-col"
+      style={{
+        backgroundColor: colors.lightBg,
+        borderColor: `${colors.primary}20`,
+        boxShadow: '0 4px 6px rgba(0,0,0,0.05)'
       }}
     >
-      <div className="flex items-center gap-3 mb-3">
-        <div 
-          className="p-2 rounded-lg flex items-center justify-center shadow-sm"
-          style={{ 
-            backgroundColor: currentColor.iconBg,
-            color: currentColor.iconColor
+      {/* Header */}
+      <motion.div 
+        className="flex items-center gap-3 mb-5"
+        whileHover={{ x: 2 }}
+      >
+        <motion.div
+          className="p-2 rounded-lg flex items-center justify-center"
+          style={{
+            backgroundColor: colors.primary,
+            color: colors.accent
           }}
+          variants={iconHover}
+          whileHover="hover"
         >
           {icon}
-        </div>
+        </motion.div>
         <h3 
-          className="font-semibold text-base"
-          style={{ color: currentColor.accent }}
+          className="font-semibold text-lg"
+          style={{ color: colors.dark }}
         >
           {title}
         </h3>
-      </div>
-      <div className="space-y-3">
+      </motion.div>
+
+      {/* Items */}
+      <div className="space-y-4 flex-1">
         {items.map((item, index) => (
-          <div key={index} className="flex items-start gap-3">
-            <div 
+          <motion.div 
+            key={index} 
+            className="flex items-start gap-3"
+            variants={item}
+            whileHover="hover"
+          >
+            <motion.div
               className="p-1.5 rounded-md flex items-center justify-center mt-0.5"
               style={{ 
                 backgroundColor: 'white',
-                color: currentColor.iconBg,
-                boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+                color: colors.primary,
+                boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
               }}
+              whileHover={{ scale: 1.1 }}
             >
               {item.icon}
-            </div>
+            </motion.div>
             <div className="flex-1">
               <p 
-                className="text-xs font-medium mb-1"
-                style={{ color: currentColor.text }}
+                className="text-xs font-medium mb-1 tracking-wide"
+                style={{ color: colors.primaryLight }}
               >
                 {item.label}
               </p>
-              <p className="text-sm font-semibold text-gray-800">
+              <motion.p 
+                className="text-sm font-semibold"
+                style={{ color: colors.dark }}
+                whileHover={{ scale: 1.02 }}
+              >
                 {item.value}
-              </p>
+              </motion.p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
-    </div>
+
+      {/* Decorative accent */}
+    
+    </motion.div>
   );
 };
 

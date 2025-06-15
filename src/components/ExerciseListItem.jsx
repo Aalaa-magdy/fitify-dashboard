@@ -27,7 +27,7 @@ const ExerciseListItem = ({ exercise, isSelected, onClick }) => {
           </p>
         </div>
       </div>
-      <ChevronRight className="text-gray-400" />
+      <ChevronRight className="text-gray-400 group-hover:text-[#14919B] transition-colors" />
     </div>
   );
 };

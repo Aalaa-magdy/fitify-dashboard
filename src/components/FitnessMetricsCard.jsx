@@ -16,7 +16,7 @@ const FitnessMetricsCard = ({ user }) => {
       title="Fitness Metrics" 
       icon={<Activity className="w-5 h-5" />}
       items={fitnessMetrics}
-      color="green"
+      color="pink"
     />
   );
 };
