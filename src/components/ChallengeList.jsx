@@ -1,6 +1,7 @@
 import { Plus, Search, Dumbbell, HelpCircle } from 'lucide-react';
 import LoadingSpinner from './LoadingSpinner';
 import ChallengeListItem from './ChallengeListItem';
+import { useEffect } from 'react';
 
 const ChallengesList = ({
   challenges,
@@ -19,7 +20,8 @@ const ChallengesList = ({
                          challenge.exerciseId?.name?.toLowerCase().includes(searchTerm.toLowerCase());
     return contentMatch || exerciseMatch;
   });
-
+ 
+  useEffect(()=>{},[selectedChallenge])
   return (
     <div className={`w-full p-2 md:w-[45%] border-r border-gray-200 ${selectedChallenge ? 'hidden md:block' : ''}`}>
       {/* Header Section */}

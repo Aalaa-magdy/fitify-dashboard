@@ -1,6 +1,9 @@
 import { Dumbbell, HelpCircle, ChevronRight } from 'lucide-react';
+import { useEffect } from 'react';
 
 const ChallengeListItem = ({ challenge, isSelected, onClick }) => {
+
+ 
   return (
     <div
       onClick={onClick}

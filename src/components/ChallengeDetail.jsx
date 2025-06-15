@@ -12,11 +12,20 @@ const ChallengeDetail = ({ challenge, onEdit, onDelete }) => {
       setLoading(true);
       try {
         if (challenge.type === 'exercise' && challenge.exerciseId) {
-          const exercise = await getExerciseById(challenge.exerciseId._id);
-          setExerciseDetails(exercise.data);
+  const exerciseId = typeof challenge.exerciseId === 'string'
+    ? challenge.exerciseId
+    : challenge.exerciseId._id;
+
+  const exercise = await getExerciseById(exerciseId);
+  setExerciseDetails(exercise.data);
+
         } else if (challenge.type === 'trivia' && challenge.questionId) {
-          const question = await getTriviaQuestionById(challenge.questionId._id);
-          setQuestionDetails(question.data);
+          const questionId = typeof challenge.questionId === 'string'
+    ? challenge.questionId
+    : challenge.questionId._id;
+
+  const question = await getTriviaQuestionById(questionId);
+  setQuestionDetails(question.data);
         }
       } catch (error) {
         console.error('Error fetching details:', error);

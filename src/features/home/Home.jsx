@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../../api/axiosInstance";
+import axios from "../../api/axiosInstance.js";
 import LoadingSpinner from '../../components/LoadingSpinner';
 import FitnessStats from "./components/FitnessStats";
 import AllCharts from "./components/AllCharts";
@@ -102,6 +102,8 @@ const Home = () => {
       </div>
     );
   }
+
+  
 
   return (
     <div className="min-h-screen">

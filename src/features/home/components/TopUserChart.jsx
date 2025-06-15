@@ -4,15 +4,14 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const TopUsersChart = ({ users }) => {
-  // Sort users by points (descending) and take top 10
-  const sortedUsers = [...users].sort((a, b) => b.points - a.points).slice(0, 10);
+   console.log(users)
   
   const data = {
-    labels: sortedUsers.map(user => user.name),
+    labels: users.map(user => user.name),
     datasets: [
       {
         label: 'Points',
-        data: sortedUsers.map(user => user.points),
+        data: users.map(user => user.points),
         backgroundColor: [
           '#14919B', // Main blue
           '#0E7C86', // Darker blue
@@ -53,7 +52,7 @@ const TopUsersChart = ({ users }) => {
       tooltip: {
         callbacks: {
           label: (context) => {
-            const user = sortedUsers[context.dataIndex];
+            const user = users[context.dataIndex];
             return `${user.name}: ${user.points} points`;
           }
         }

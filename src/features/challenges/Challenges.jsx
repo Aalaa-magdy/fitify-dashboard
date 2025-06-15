@@ -19,6 +19,10 @@ const Challenges = () => {
   const [formType, setFormType] = useState(null);
   const [editingChallenge, setEditingChallenge] = useState(null);
   useEffect(() => {
+  console.log("Selected challenge changed:", selectedChallenge);
+}, [selectedChallenge]);
+
+  useEffect(() => {
     const fetchChallenges = async () => {
       try {
         const data = await getAllChallenges();
@@ -108,6 +112,7 @@ const handleSubmitChallenge = async (challengeData) => {
           questionId: triviaResponse.data._id
         });
         setChallenges([...challenges, response.data]);
+        // setSelectedChallenge(response.data);
       }
       toast.success('Challenge created successfully!');
     }
