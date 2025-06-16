@@ -10,7 +10,7 @@ import Workouts from './features/workouts/Workouts';
 import Home from './features/home/Home';
 import AdminLogin from './pages/AdminLogin';
 import AdminProfile from './features/settings/AdminProfile';
-import Exercises from './features/exercises/exercises';
+import Exercises from './features/exercises/Exercises';
 import Users from './features/users/Users';
 import Challenges from './features/challenges/Challenges'
 
